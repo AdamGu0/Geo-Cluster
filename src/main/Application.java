@@ -8,11 +8,14 @@ package main;
 import DBscan.DBScan;
 import DBscan.Tuple;
 import gridgrowing.GridClustering;
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
+import javax.swing.JScrollBar;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -33,6 +36,12 @@ public class Application extends javax.swing.JFrame {
         tabbedViewerPanel.addTab("2D", clusterPanel);
         mapKit = new MapKit();
         tabbedViewerPanel.addTab("GPS", mapKit);
+
+        dbScanRadio.setSelected(false);
+        kMeansRadio.setSelected(false);
+        smartSwapRadio.setSelected(false);
+        gridGrowingRadio.setSelected(false);
+        gridBasedRadio.setSelected(false);
 
         // for Grid-Based Clustering
         mapKit.getMainMap().addMouseListener(new java.awt.event.MouseAdapter() {
@@ -63,38 +72,6 @@ public class Application extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        settingPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        minPtsTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        epsTextField = new javax.swing.JTextField();
-        dbscanButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        kMeansTextField = new javax.swing.JTextField();
-        iterationsTextField = new javax.swing.JTextField();
-        kMeansButton = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        smartSwapTextField = new javax.swing.JTextField();
-        smartSwapButton = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        mTextField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        optionComboBox = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        nxTextField = new javax.swing.JTextField();
-        nyTextField = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        gridGrowingButton = new javax.swing.JButton();
-        gridBasedPanel = new javax.swing.JPanel();
-        gridBasedButton = new javax.swing.JButton();
-        gridSizeSlider = new javax.swing.JSlider();
-        jLabel19 = new javax.swing.JLabel();
-        gridSizeLabel = new javax.swing.JLabel();
         stateLabel = new javax.swing.JLabel();
         tabbedViewerPanel = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -122,6 +99,64 @@ public class Application extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         algorithmLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
+        settingScrollPane = new javax.swing.JScrollPane();
+        settingPanel = new javax.swing.JPanel();
+        dbScanPanel = new javax.swing.JPanel();
+        dbScanSettingPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        minPtsTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        epsTextField = new javax.swing.JTextField();
+        dbscanButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        dbScanSelectPanel = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        dbScanRadio = new javax.swing.JRadioButton();
+        kMeansPanel = new javax.swing.JPanel();
+        kMeansSettingPanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        kMeansTextField = new javax.swing.JTextField();
+        iterationsTextField = new javax.swing.JTextField();
+        kMeansButton = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        kMeansSelectPanel = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        kMeansRadio = new javax.swing.JRadioButton();
+        smartSwapPanel = new javax.swing.JPanel();
+        smartSwapSettingPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        smartSwapTextField = new javax.swing.JTextField();
+        smartSwapButton = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        smartSwapSelectPanel = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        smartSwapRadio = new javax.swing.JRadioButton();
+        gridGrowingPanel = new javax.swing.JPanel();
+        gridGrowingSettingPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        mTextField = new javax.swing.JTextField();
+        optionComboBox = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        nxTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        nyTextField = new javax.swing.JTextField();
+        gridGrowingButton = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        gridGrowingSelectPanel = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        gridGrowingRadio = new javax.swing.JRadioButton();
+        gridBasedPanel = new javax.swing.JPanel();
+        gridBasedSettingPanel = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        gridSizeLabel = new javax.swing.JLabel();
+        gridSizeSlider = new javax.swing.JSlider();
+        gridBasedButton = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
+        gridBasedSelectPanel = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        gridBasedRadio = new javax.swing.JRadioButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         normalDataMenuItem = new javax.swing.JMenuItem();
@@ -139,304 +174,6 @@ public class Application extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Geo-Cluster");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("DBScan Clustering"));
-        jPanel1.setToolTipText("");
-
-        jLabel1.setText("MinPts");
-
-        minPtsTextField.setText("17");
-
-        jLabel2.setText("eps");
-
-        epsTextField.setText("22000");
-
-        dbscanButton.setText("run");
-        dbscanButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbscanButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(minPtsTextField)
-                            .addComponent(epsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(dbscanButton)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(minPtsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(epsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dbscanButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("K-Means Clustering"));
-
-        jLabel3.setText("K");
-
-        jLabel4.setText("Iterations");
-
-        kMeansTextField.setText("15");
-
-        iterationsTextField.setText("100");
-
-        kMeansButton.setText("run");
-        kMeansButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kMeansButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(kMeansTextField)
-                            .addComponent(iterationsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(kMeansButton)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(kMeansTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(iterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(kMeansButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("SmartSwap Clustering"));
-
-        jLabel5.setText("K");
-
-        smartSwapTextField.setText("10");
-
-        smartSwapButton.setText("run");
-        smartSwapButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smartSwapButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(smartSwapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(smartSwapButton))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(smartSwapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(smartSwapButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("GridGrowing Clustering"));
-
-        jLabel6.setText("M");
-
-        mTextField.setText("31");
-
-        jLabel7.setText("Seed");
-
-        optionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "random", "max values", "aliquot" }));
-
-        jLabel8.setText("Nx");
-
-        nxTextField.setText("147");
-
-        nyTextField.setText("146");
-
-        jLabel9.setText("Ny");
-
-        gridGrowingButton.setText("run");
-        gridGrowingButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gridGrowingButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(optionComboBox, 0, 1, Short.MAX_VALUE)
-                            .addComponent(mTextField)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(gridGrowingButton, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(mTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(optionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(nxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridGrowingButton))
-        );
-
-        gridBasedPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Grid-Based Clustering"));
-
-        gridBasedButton.setText("run");
-        gridBasedButton.setEnabled(false);
-        gridBasedButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gridBasedButtonActionPerformed(evt);
-            }
-        });
-
-        gridSizeSlider.setMinimum(30);
-        gridSizeSlider.setValue(60);
-
-        jLabel19.setText("Grid Size:");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, gridSizeSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), gridSizeLabel, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        javax.swing.GroupLayout gridBasedPanelLayout = new javax.swing.GroupLayout(gridBasedPanel);
-        gridBasedPanel.setLayout(gridBasedPanelLayout);
-        gridBasedPanelLayout.setHorizontalGroup(
-            gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gridBasedPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(gridBasedButton)
-                    .addGroup(gridBasedPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gridSizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addComponent(gridSizeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
-        gridBasedPanelLayout.setVerticalGroup(
-            gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridBasedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(gridSizeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridSizeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridBasedButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout settingPanelLayout = new javax.swing.GroupLayout(settingPanel);
-        settingPanel.setLayout(settingPanelLayout);
-        settingPanelLayout.setHorizontalGroup(
-            settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gridBasedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(8, Short.MAX_VALUE))
-        );
-        settingPanelLayout.setVerticalGroup(
-            settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridBasedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
 
         stateLabel.setText(" ");
 
@@ -623,7 +360,586 @@ public class Application extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabbedViewerPanel.addTab("Log", jPanel5);
+        tabbedViewerPanel.addTab("Info", jPanel5);
+
+        settingScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        dbScanPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        dbScanPanel.setToolTipText("");
+
+        jLabel1.setText("MinPts");
+
+        minPtsTextField.setText("17");
+
+        jLabel2.setText("eps");
+
+        epsTextField.setText("22000");
+
+        dbscanButton.setText("run");
+        dbscanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dbscanButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dbScanSettingPanelLayout = new javax.swing.GroupLayout(dbScanSettingPanel);
+        dbScanSettingPanel.setLayout(dbScanSettingPanelLayout);
+        dbScanSettingPanelLayout.setHorizontalGroup(
+            dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dbScanSettingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dbScanSettingPanelLayout.createSequentialGroup()
+                        .addGroup(dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(minPtsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(epsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dbScanSettingPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(dbscanButton)))
+                .addContainerGap())
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        dbScanSettingPanelLayout.setVerticalGroup(
+            dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dbScanSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(minPtsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dbScanSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(epsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dbscanButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        dbScanSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                dbScanSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel21.setText("DBScan Clustering");
+
+        dbScanRadio.setSelected(true);
+        dbScanRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        dbScanRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                dbScanRadioStateChanged(evt);
+            }
+        });
+        dbScanRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dbScanRadioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dbScanSelectPanelLayout = new javax.swing.GroupLayout(dbScanSelectPanel);
+        dbScanSelectPanel.setLayout(dbScanSelectPanelLayout);
+        dbScanSelectPanelLayout.setHorizontalGroup(
+            dbScanSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dbScanSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(dbScanRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        dbScanSelectPanelLayout.setVerticalGroup(
+            dbScanSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dbScanSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dbScanSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dbScanRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dbScanPanelLayout = new javax.swing.GroupLayout(dbScanPanel);
+        dbScanPanel.setLayout(dbScanPanelLayout);
+        dbScanPanelLayout.setHorizontalGroup(
+            dbScanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dbScanSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dbScanSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        dbScanPanelLayout.setVerticalGroup(
+            dbScanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dbScanPanelLayout.createSequentialGroup()
+                .addComponent(dbScanSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(dbScanSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        kMeansPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        jLabel3.setText("K");
+
+        jLabel4.setText("Iterations");
+
+        kMeansTextField.setText("15");
+
+        iterationsTextField.setText("100");
+
+        kMeansButton.setText("run");
+        kMeansButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kMeansButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout kMeansSettingPanelLayout = new javax.swing.GroupLayout(kMeansSettingPanel);
+        kMeansSettingPanel.setLayout(kMeansSettingPanelLayout);
+        kMeansSettingPanelLayout.setHorizontalGroup(
+            kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kMeansSettingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kMeansSettingPanelLayout.createSequentialGroup()
+                        .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(kMeansTextField)
+                            .addComponent(iterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kMeansSettingPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(kMeansButton)))
+                .addContainerGap())
+            .addComponent(jSeparator2)
+        );
+        kMeansSettingPanelLayout.setVerticalGroup(
+            kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kMeansSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(kMeansTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(iterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kMeansButton)
+                .addContainerGap())
+        );
+
+        kMeansSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                kMeansSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel22.setText("K-Means Clustering");
+
+        kMeansRadio.setSelected(true);
+        kMeansRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        kMeansRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                kMeansRadioStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout kMeansSelectPanelLayout = new javax.swing.GroupLayout(kMeansSelectPanel);
+        kMeansSelectPanel.setLayout(kMeansSelectPanelLayout);
+        kMeansSelectPanelLayout.setHorizontalGroup(
+            kMeansSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kMeansSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(kMeansRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        kMeansSelectPanelLayout.setVerticalGroup(
+            kMeansSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kMeansSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(kMeansSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(kMeansRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout kMeansPanelLayout = new javax.swing.GroupLayout(kMeansPanel);
+        kMeansPanel.setLayout(kMeansPanelLayout);
+        kMeansPanelLayout.setHorizontalGroup(
+            kMeansPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(kMeansSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kMeansSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        kMeansPanelLayout.setVerticalGroup(
+            kMeansPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kMeansPanelLayout.createSequentialGroup()
+                .addComponent(kMeansSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(kMeansSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        smartSwapPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        jLabel5.setText("K");
+
+        smartSwapTextField.setText("10");
+
+        smartSwapButton.setText("run");
+        smartSwapButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smartSwapButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout smartSwapSettingPanelLayout = new javax.swing.GroupLayout(smartSwapSettingPanel);
+        smartSwapSettingPanel.setLayout(smartSwapSettingPanelLayout);
+        smartSwapSettingPanelLayout.setHorizontalGroup(
+            smartSwapSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator3)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smartSwapSettingPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(smartSwapSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(smartSwapButton)
+                    .addGroup(smartSwapSettingPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(smartSwapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
+        );
+        smartSwapSettingPanelLayout.setVerticalGroup(
+            smartSwapSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smartSwapSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(smartSwapSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(smartSwapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(smartSwapButton)
+                .addContainerGap())
+        );
+
+        smartSwapSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                smartSwapSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel23.setText("SmartSwap Clustering");
+
+        smartSwapRadio.setSelected(true);
+        smartSwapRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        smartSwapRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                smartSwapRadioStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout smartSwapSelectPanelLayout = new javax.swing.GroupLayout(smartSwapSelectPanel);
+        smartSwapSelectPanel.setLayout(smartSwapSelectPanelLayout);
+        smartSwapSelectPanelLayout.setHorizontalGroup(
+            smartSwapSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smartSwapSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(smartSwapRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        smartSwapSelectPanelLayout.setVerticalGroup(
+            smartSwapSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smartSwapSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(smartSwapSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smartSwapRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout smartSwapPanelLayout = new javax.swing.GroupLayout(smartSwapPanel);
+        smartSwapPanel.setLayout(smartSwapPanelLayout);
+        smartSwapPanelLayout.setHorizontalGroup(
+            smartSwapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(smartSwapSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(smartSwapSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        smartSwapPanelLayout.setVerticalGroup(
+            smartSwapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smartSwapPanelLayout.createSequentialGroup()
+                .addComponent(smartSwapSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(smartSwapSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        gridGrowingPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        jLabel6.setText("M");
+
+        mTextField.setText("31");
+
+        optionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "random", "max values", "aliquot" }));
+
+        jLabel7.setText("Seed");
+
+        jLabel8.setText("Nx");
+
+        nxTextField.setText("147");
+
+        jLabel9.setText("Ny");
+
+        nyTextField.setText("146");
+
+        gridGrowingButton.setText("run");
+        gridGrowingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gridGrowingButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gridGrowingSettingPanelLayout = new javax.swing.GroupLayout(gridGrowingSettingPanel);
+        gridGrowingSettingPanel.setLayout(gridGrowingSettingPanelLayout);
+        gridGrowingSettingPanelLayout.setHorizontalGroup(
+            gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridGrowingSettingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridGrowingSettingPanelLayout.createSequentialGroup()
+                        .addGroup(gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(mTextField)
+                            .addComponent(optionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridGrowingSettingPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(gridGrowingButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridGrowingSettingPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(jSeparator4)
+        );
+        gridGrowingSettingPanelLayout.setVerticalGroup(
+            gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gridGrowingSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(mTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(optionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gridGrowingSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(nxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridGrowingButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridGrowingSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                gridGrowingSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel24.setText("GridGrowing Clustering");
+
+        gridGrowingRadio.setSelected(true);
+        gridGrowingRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        gridGrowingRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                gridGrowingRadioStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gridGrowingSelectPanelLayout = new javax.swing.GroupLayout(gridGrowingSelectPanel);
+        gridGrowingSelectPanel.setLayout(gridGrowingSelectPanelLayout);
+        gridGrowingSelectPanelLayout.setHorizontalGroup(
+            gridGrowingSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gridGrowingSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(gridGrowingRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        gridGrowingSelectPanelLayout.setVerticalGroup(
+            gridGrowingSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gridGrowingSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gridGrowingSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gridGrowingRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout gridGrowingPanelLayout = new javax.swing.GroupLayout(gridGrowingPanel);
+        gridGrowingPanel.setLayout(gridGrowingPanelLayout);
+        gridGrowingPanelLayout.setHorizontalGroup(
+            gridGrowingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(gridGrowingSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gridGrowingSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        gridGrowingPanelLayout.setVerticalGroup(
+            gridGrowingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridGrowingPanelLayout.createSequentialGroup()
+                .addComponent(gridGrowingSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(gridGrowingSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        gridBasedPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        jLabel19.setText("Grid Size:");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, gridSizeSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), gridSizeLabel, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        gridSizeSlider.setMinimum(30);
+        gridSizeSlider.setValue(60);
+
+        gridBasedButton.setText("run");
+        gridBasedButton.setEnabled(false);
+        gridBasedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gridBasedButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gridBasedSettingPanelLayout = new javax.swing.GroupLayout(gridBasedSettingPanel);
+        gridBasedSettingPanel.setLayout(gridBasedSettingPanelLayout);
+        gridBasedSettingPanelLayout.setHorizontalGroup(
+            gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gridBasedSettingPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(gridBasedButton)
+                    .addGroup(gridBasedSettingPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(gridSizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addComponent(gridSizeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator5)
+        );
+        gridBasedSettingPanelLayout.setVerticalGroup(
+            gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridBasedSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(gridSizeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridSizeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridBasedButton)
+                .addContainerGap())
+        );
+
+        gridBasedSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                gridBasedSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel25.setText("Grid-Based Clustering");
+
+        gridBasedRadio.setSelected(true);
+        gridBasedRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        gridBasedRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                gridBasedRadioStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gridBasedSelectPanelLayout = new javax.swing.GroupLayout(gridBasedSelectPanel);
+        gridBasedSelectPanel.setLayout(gridBasedSelectPanelLayout);
+        gridBasedSelectPanelLayout.setHorizontalGroup(
+            gridBasedSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gridBasedSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(gridBasedRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        gridBasedSelectPanelLayout.setVerticalGroup(
+            gridBasedSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gridBasedSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gridBasedSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gridBasedRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout gridBasedPanelLayout = new javax.swing.GroupLayout(gridBasedPanel);
+        gridBasedPanel.setLayout(gridBasedPanelLayout);
+        gridBasedPanelLayout.setHorizontalGroup(
+            gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(gridBasedSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gridBasedSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        gridBasedPanelLayout.setVerticalGroup(
+            gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridBasedPanelLayout.createSequentialGroup()
+                .addComponent(gridBasedSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(gridBasedSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout settingPanelLayout = new javax.swing.GroupLayout(settingPanel);
+        settingPanel.setLayout(settingPanelLayout);
+        settingPanelLayout.setHorizontalGroup(
+            settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kMeansPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(smartSwapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gridGrowingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gridBasedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dbScanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
+        );
+        settingPanelLayout.setVerticalGroup(
+            settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dbScanPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kMeansPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(smartSwapPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridGrowingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridBasedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        settingScrollPane.setViewportView(settingPanel);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -703,24 +1019,24 @@ public class Application extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(settingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tabbedViewerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(settingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(settingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tabbedViewerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(stateLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         tabbedViewerPanel.getAccessibleContext().setAccessibleName("");
@@ -778,6 +1094,80 @@ public class Application extends javax.swing.JFrame {
     private void gpsDataMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gpsDataMenuItemActionPerformed
         loadFile(true);
     }//GEN-LAST:event_gpsDataMenuItemActionPerformed
+
+    private void dbScanRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dbScanRadioStateChanged
+        boolean selected = dbScanRadio.isSelected();
+        dbScanSettingPanel.setVisible(selected);
+        if (selected) {
+            dbScanPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            dbScanPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_dbScanRadioStateChanged
+
+    private void dbScanSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dbScanSelectPanelMouseReleased
+        dbScanRadio.setSelected(!dbScanRadio.isSelected());
+    }//GEN-LAST:event_dbScanSelectPanelMouseReleased
+
+    private void kMeansRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_kMeansRadioStateChanged
+        boolean selected = kMeansRadio.isSelected();
+        kMeansSettingPanel.setVisible(selected);
+        if (selected) {
+            kMeansPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            kMeansPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_kMeansRadioStateChanged
+
+    private void kMeansSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kMeansSelectPanelMouseReleased
+        kMeansRadio.setSelected(!kMeansRadio.isSelected());
+    }//GEN-LAST:event_kMeansSelectPanelMouseReleased
+
+    private void smartSwapRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_smartSwapRadioStateChanged
+        boolean selected = smartSwapRadio.isSelected();
+        smartSwapSettingPanel.setVisible(selected);
+        if (selected) {
+            smartSwapPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            smartSwapPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_smartSwapRadioStateChanged
+
+    private void smartSwapSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_smartSwapSelectPanelMouseReleased
+        smartSwapRadio.setSelected(!smartSwapRadio.isSelected());
+    }//GEN-LAST:event_smartSwapSelectPanelMouseReleased
+
+    private void gridGrowingRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gridGrowingRadioStateChanged
+        boolean selected = gridGrowingRadio.isSelected();
+        gridGrowingSettingPanel.setVisible(selected);
+        if (selected) {
+            gridGrowingPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            gridGrowingPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_gridGrowingRadioStateChanged
+
+    private void gridGrowingSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridGrowingSelectPanelMouseReleased
+        gridGrowingRadio.setSelected(!gridGrowingRadio.isSelected());
+    }//GEN-LAST:event_gridGrowingSelectPanelMouseReleased
+
+    private void gridBasedRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gridBasedRadioStateChanged
+        boolean selected = gridBasedRadio.isSelected();
+        gridBasedSettingPanel.setVisible(selected);
+        if (selected) {
+            gridBasedPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            gridBasedPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_gridBasedRadioStateChanged
+
+    private void gridBasedSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridBasedSelectPanelMouseReleased
+        gridBasedRadio.setSelected(!gridBasedRadio.isSelected());
+    }//GEN-LAST:event_gridBasedSelectPanelMouseReleased
+
+    private void dbScanRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbScanRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dbScanRadioActionPerformed
 
     public void setIsGPSData(boolean isGPSData) {
         if (isGPSData) {
@@ -1126,6 +1516,10 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JLabel dataTypeLabel;
+    private javax.swing.JPanel dbScanPanel;
+    private javax.swing.JRadioButton dbScanRadio;
+    private javax.swing.JPanel dbScanSelectPanel;
+    private javax.swing.JPanel dbScanSettingPanel;
     private javax.swing.JButton dbscanButton;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JLabel dimensionsLabel;
@@ -1137,7 +1531,14 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem gpsDataMenuItem;
     private javax.swing.JButton gridBasedButton;
     private javax.swing.JPanel gridBasedPanel;
+    private javax.swing.JRadioButton gridBasedRadio;
+    private javax.swing.JPanel gridBasedSelectPanel;
+    private javax.swing.JPanel gridBasedSettingPanel;
     private javax.swing.JButton gridGrowingButton;
+    private javax.swing.JPanel gridGrowingPanel;
+    private javax.swing.JRadioButton gridGrowingRadio;
+    private javax.swing.JPanel gridGrowingSelectPanel;
+    private javax.swing.JPanel gridGrowingSettingPanel;
     private javax.swing.JLabel gridSizeLabel;
     private javax.swing.JSlider gridSizeSlider;
     private javax.swing.JMenu helpMenu;
@@ -1155,6 +1556,11 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1162,15 +1568,20 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JButton kMeansButton;
+    private javax.swing.JPanel kMeansPanel;
+    private javax.swing.JRadioButton kMeansRadio;
+    private javax.swing.JPanel kMeansSelectPanel;
+    private javax.swing.JPanel kMeansSettingPanel;
     private javax.swing.JTextField kMeansTextField;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JTextField mTextField;
@@ -1186,7 +1597,12 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JButton saveButton;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JPanel settingPanel;
+    private javax.swing.JScrollPane settingScrollPane;
     private javax.swing.JButton smartSwapButton;
+    private javax.swing.JPanel smartSwapPanel;
+    private javax.swing.JRadioButton smartSwapRadio;
+    private javax.swing.JPanel smartSwapSelectPanel;
+    private javax.swing.JPanel smartSwapSettingPanel;
     private javax.swing.JTextField smartSwapTextField;
     private javax.swing.JLabel stateLabel;
     private javax.swing.JTabbedPane tabbedViewerPanel;
