@@ -38,7 +38,7 @@ public class ClusterPanel extends JPanel {
         if ( clusters != null) draw();
     }
     
-    public void showCluster(Cluster[] _clusters) {
+    public void showClusters(Cluster[] _clusters) {
         clusters = _clusters;
         this.repaint();
     }

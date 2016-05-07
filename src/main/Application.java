@@ -9,6 +9,8 @@ import DBscan.DBScan;
 import DBscan.Tuple;
 import gridgrowing.GridClustering;
 import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,29 +39,14 @@ public class Application extends javax.swing.JFrame {
         mapKit = new MapKit();
         tabbedViewerPanel.addTab("GPS", mapKit);
 
+        //fold clustering panels
         dbScanRadio.setSelected(false);
         kMeansRadio.setSelected(false);
         smartSwapRadio.setSelected(false);
         gridGrowingRadio.setSelected(false);
         gridBasedRadio.setSelected(false);
 
-        // for Grid-Based Clustering
-        mapKit.getMainMap().addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                if (mapKit.gridBased.doGridBasedClustering()) {
-                    showResultInfo(mapKit.gridBased.clustersArray, mapKit.gridBased.duration, "Grid-Based");
-                }
-            }
-        });
-        mapKit.getMainMap().addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                if (mapKit.gridBased.doGridBasedClustering()) {
-                    showResultInfo(mapKit.gridBased.clustersArray, mapKit.gridBased.duration, "Grid-Based");
-                }
-            }
-        });
+        setMapResultUpdate();
     }
 
     /**
@@ -1213,7 +1200,62 @@ public class Application extends javax.swing.JFrame {
         stateLabel.setText("Clusters:" + length + " MSE:" + mse + " CH:" + ch + " Time:" + duration + "ms");
         logTextArea.setText(str + "\nMSE:" + mse + "\nCH:" + ch + "\nTime:" + duration + "ms\n");
     }
+    
+    private void setMapResultUpdate() {
+        mapKit.getMainMap().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mapResultUpdate();
+            }
+        });
+        mapKit.getMainMap().addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                mapResultUpdate();
+            }
+        });
+        mapKit.getZoomSlider().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mapResultUpdate();
+            }
+        });
+        mapKit.getZoomInButton().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mapResultUpdate();
+            }
+        });
+        mapKit.getZoomOutButton().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mapResultUpdate();
+            }
+        });
+    }
+    
+    private void mapResultUpdate() {
+        if (mapKit.gridBased.doGridBasedClustering()) {
+            showResultInfo(mapKit.gridBased.clustersArray, mapKit.gridBased.duration, "Grid-Based");
+        }
+    }
 
+    private void cleanResult() {
+        mapKit.gridBased.startGridBased = false;
+        mapKit.setWaypoints(null);
+        clusterPanel.clusters = null;
+        
+        algorithm = null;
+        String na = "N/A";
+        algorithmLabel.setText(na);
+        clustersLabel.setText(na);
+        mseLabel.setText(na);
+        chLabel.setText(na);
+        timeLabel.setText(na);
+        stateLabel.setText("");
+        logTextArea.setText("");
+    }
+    
     private void loadFile(boolean isGPSData) {
         FileFilter filter;
         filter = new FileFilter() {
@@ -1248,6 +1290,7 @@ public class Application extends javax.swing.JFrame {
                     pointsLabel.setText(Integer.toString(data.length));
                     dimensionsLabel.setText(Integer.toString(rd.getVectorSize()));
                     setIsGPSData(isGPSData);
+                    cleanResult();
                 } else {
                     showWarning("File is invalid!");
                 }
@@ -1477,19 +1520,21 @@ public class Application extends javax.swing.JFrame {
 
     private void showResult(Cluster[] clusters) {
         resultClusters = clusters;
-        clusterPanel.clusters = null;
 
         if (rd.isGPSData) {
             tabbedViewerPanel.setSelectedIndex(2);
             mapKit.setWaypoints(resultClusters);
+            clusterPanel.clusters = null;
             return;
         }
-
+        
+        mapKit.setWaypoints(null);
         if (rd.getVectorSize() != 2) {
             tabbedViewerPanel.setSelectedIndex(0);
+            clusterPanel.clusters = null;
         } else {
             tabbedViewerPanel.setSelectedIndex(1);
-            clusterPanel.showCluster(resultClusters);
+            clusterPanel.showClusters(resultClusters);
         }
     }
 

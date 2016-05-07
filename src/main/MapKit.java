@@ -78,11 +78,15 @@ public class MapKit extends JXMapKit {
     }
 
     public void setWaypoints(Cluster[] clusters) {
-        waypoints = new HashSet<MyWaypoint>(clusters.length * 2);
-        for (Cluster c : clusters) {
-            GeoPosition p = new GeoPosition(c.centroid.vectors[1], c.centroid.vectors[0]);
-            MyWaypoint w = new MyWaypoint(c.pointsList.size(), p);
-            waypoints.add(w);
+        if (clusters == null) {
+            waypoints = new HashSet<MyWaypoint>(0);
+        } else {
+            waypoints = new HashSet<MyWaypoint>(clusters.length * 2);
+            for (Cluster c : clusters) {
+                GeoPosition p = new GeoPosition(c.centroid.vectors[1], c.centroid.vectors[0]);
+                MyWaypoint w = new MyWaypoint(c.pointsList.size(), p);
+                waypoints.add(w);
+            }
         }
         waypointPainter.setWaypoints(waypoints);
         this.repaint();
