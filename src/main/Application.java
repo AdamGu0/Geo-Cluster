@@ -12,13 +12,22 @@ import java.awt.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollBar;
 import javax.swing.filechooser.FileFilter;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -85,7 +94,7 @@ public class Application extends javax.swing.JFrame {
         timeLabel = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         algorithmLabel = new javax.swing.JLabel();
-        saveButton = new javax.swing.JButton();
+        exportButton = new javax.swing.JButton();
         settingScrollPane = new javax.swing.JScrollPane();
         settingPanel = new javax.swing.JPanel();
         dbScanPanel = new javax.swing.JPanel();
@@ -260,7 +269,12 @@ public class Application extends javax.swing.JFrame {
 
         algorithmLabel.setText("N/A");
 
-        saveButton.setText("save");
+        exportButton.setText("export");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -285,7 +299,7 @@ public class Application extends javax.swing.JFrame {
                             .addComponent(algorithmLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(saveButton)
+                        .addComponent(exportButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,7 +336,7 @@ public class Application extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(timeLabel))
                 .addGap(18, 18, 18)
-                .addComponent(saveButton)
+                .addComponent(exportButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1010,7 +1024,7 @@ public class Application extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tabbedViewerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tabbedViewerPanel))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1019,11 +1033,10 @@ public class Application extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(settingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tabbedViewerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stateLabel)))
-                .addContainerGap(343, Short.MAX_VALUE))
+                    .addComponent(tabbedViewerPanel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stateLabel)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         tabbedViewerPanel.getAccessibleContext().setAccessibleName("");
@@ -1156,7 +1169,11 @@ public class Application extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dbScanRadioActionPerformed
 
-    public void setIsGPSData(boolean isGPSData) {
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        exportResult();
+    }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void setIsGPSData(boolean isGPSData) {
         if (isGPSData) {
             dataTypeLabel.setText("GPS");
         } else {
@@ -1166,7 +1183,8 @@ public class Application extends javax.swing.JFrame {
         gridBasedButton.setEnabled(isGPSData);
     }
 
-    public void showResultInfo(Cluster[] clusters, long duration, String algorithm) {
+    private void showResultInfo(Cluster[] clusters, long duration, String algorithm) {
+        resultClusters = clusters;
         this.algorithm = algorithm;
         String a = algorithm + " Clustering";
         
@@ -1199,6 +1217,61 @@ public class Application extends javax.swing.JFrame {
         timeLabel.setText(String.valueOf(duration) + "ms");
         stateLabel.setText("Clusters:" + length + " MSE:" + mse + " CH:" + ch + " Time:" + duration + "ms");
         logTextArea.setText(str + "\nMSE:" + mse + "\nCH:" + ch + "\nTime:" + duration + "ms\n");
+    }
+    
+    private void showResult(Cluster[] clusters) {
+        if (rd.isGPSData) {
+            tabbedViewerPanel.setSelectedIndex(2);
+            mapKit.setWaypoints(clusters);
+            clusterPanel.clusters = null;
+            return;
+        }
+        
+        mapKit.setWaypoints(null);
+        if (rd.getVectorSize() != 2) {
+            tabbedViewerPanel.setSelectedIndex(0);
+            clusterPanel.clusters = null;
+        } else {
+            tabbedViewerPanel.setSelectedIndex(1);
+            clusterPanel.showClusters(clusters);
+        }
+    }
+    
+    private void exportResult() {
+        if (resultClusters == null) {
+            showWarning("There is no result.");
+            return;
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("algorithm", algorithm);
+        jsonObject.put("clusters", resultClusters.length);
+        jsonObject.put("MSE", Double.valueOf(mseLabel.getText()));
+        jsonObject.put("CH", Double.valueOf(chLabel.getText()));
+        String time = timeLabel.getText();
+        jsonObject.put("time", Integer.valueOf(time.substring(0, time.length() - 2)));
+        for (Cluster c : resultClusters) {
+            JSONArray vArray = new JSONArray();
+            for (double v : c.centroid.vectors) {
+                vArray.put(v);
+            }
+            jsonObject.append("centers", vArray);
+        }
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+	String presentTime = df.format(new Date());
+        
+        String exportedFileName = fileName.substring(0, fileName.length() - 4) + "_" + algorithm + "_" + presentTime + ".json";
+        try {
+            FileOutputStream os = new FileOutputStream("data_export/" + exportedFileName);
+            OutputStreamWriter writer = new OutputStreamWriter(os, "UTF-8");
+            jsonObject.write(writer);
+            writer.close();
+            os.close();
+            showWarning(exportedFileName + " exported.");
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+            showWarning("File operation failed.");
+        }
     }
     
     private void setMapResultUpdate() {
@@ -1241,6 +1314,7 @@ public class Application extends javax.swing.JFrame {
     }
 
     private void cleanResult() {
+        resultClusters = null;
         mapKit.gridBased.startGridBased = false;
         mapKit.setWaypoints(null);
         clusterPanel.clusters = null;
@@ -1271,7 +1345,7 @@ public class Application extends javax.swing.JFrame {
                 return "Data files(*.txt, *.csv)";
             }
         };
-        JFileChooser file = new JFileChooser(".");
+        JFileChooser file = new JFileChooser("dataset/");
         file.addChoosableFileFilter(filter);
         int result = file.showOpenDialog(null);
 
@@ -1302,7 +1376,7 @@ public class Application extends javax.swing.JFrame {
 
         //check the input data and parameters
         if (data == null) {
-            showWarning("There is no data of points");
+            showWarning("There is no data of points.");
             return;
         } else if (data.length == 0) {
             showWarning("There is no point!");
@@ -1518,26 +1592,6 @@ public class Application extends javax.swing.JFrame {
         // saveCluster(preFileName+"_GridGrowing", clusters, clusters.length);
     }
 
-    private void showResult(Cluster[] clusters) {
-        resultClusters = clusters;
-
-        if (rd.isGPSData) {
-            tabbedViewerPanel.setSelectedIndex(2);
-            mapKit.setWaypoints(resultClusters);
-            clusterPanel.clusters = null;
-            return;
-        }
-        
-        mapKit.setWaypoints(null);
-        if (rd.getVectorSize() != 2) {
-            tabbedViewerPanel.setSelectedIndex(0);
-            clusterPanel.clusters = null;
-        } else {
-            tabbedViewerPanel.setSelectedIndex(1);
-            clusterPanel.showClusters(resultClusters);
-        }
-    }
-
     private void showWarning(String text) {
         stateLabel.setText(text);
     }
@@ -1547,7 +1601,6 @@ public class Application extends javax.swing.JFrame {
     private Point[] data; // extracted data of points from file
     private String algorithm;
     private String fileName;
-    private String exportFileName;
     private ClusterPanel clusterPanel;
     private MapKit mapKit;
     private Cluster[] resultClusters;
@@ -1571,6 +1624,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JTextField epsTextField;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JButton exportButton;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField fileTextField;
     private javax.swing.JMenuItem gpsDataMenuItem;
@@ -1639,7 +1693,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> optionComboBox;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel pointsLabel;
-    private javax.swing.JButton saveButton;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JPanel settingPanel;
     private javax.swing.JScrollPane settingScrollPane;

@@ -130,7 +130,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="stateLabel" max="32767" attributes="0"/>
-                  <Component id="tabbedViewerPanel" max="-2" attributes="0"/>
+                  <Component id="tabbedViewerPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="57" max="32767" attributes="0"/>
           </Group>
@@ -142,13 +142,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="settingScrollPane" pref="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="tabbedViewerPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="stateLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="tabbedViewerPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="343" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="stateLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="77" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -352,7 +350,7 @@
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="exportButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -400,7 +398,7 @@
                               <Component id="timeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="exportButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -481,10 +479,13 @@
                     <Property name="text" type="java.lang.String" value="N/A"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="saveButton">
+                <Component class="javax.swing.JButton" name="exportButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="save"/>
+                    <Property name="text" type="java.lang.String" value="export"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
