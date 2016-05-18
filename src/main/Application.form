@@ -28,11 +28,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gpsDataMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="saveMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="exportMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="97"/>
-                <Property name="text" type="java.lang.String" value="Save"/>
+                <Property name="text" type="java.lang.String" value="Export result"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
@@ -511,7 +514,7 @@
                           <Component id="kMeansPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="smartSwapPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="gridGrowingPanel" max="32767" attributes="0"/>
-                          <Component id="gridBasedPanel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="markerClustererPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="dbScanPanel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -530,7 +533,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="gridGrowingPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="gridBasedPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="markerClustererPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1206,7 +1209,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="gridBasedPanel">
+            <Container class="javax.swing.JPanel" name="markerClustererPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1218,22 +1221,22 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="gridBasedSettingPanel" max="32767" attributes="0"/>
-                      <Component id="gridBasedSelectPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="markerClustererSettingPanel" max="32767" attributes="0"/>
+                      <Component id="markerClustererSelectPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="gridBasedSelectPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="markerClustererSelectPanel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="gridBasedSettingPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="markerClustererSettingPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="gridBasedSettingPanel">
+                <Container class="javax.swing.JPanel" name="markerClustererSettingPanel">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -1302,9 +1305,9 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="gridBasedSelectPanel">
+                <Container class="javax.swing.JPanel" name="markerClustererSelectPanel">
                   <Events>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gridBasedSelectPanelMouseReleased"/>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="markerClustererSelectPanelMouseReleased"/>
                   </Events>
 
                   <Layout>
@@ -1314,7 +1317,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="25" max="32767" attributes="0"/>
-                              <Component id="gridBasedRadio" min="-2" max="-2" attributes="0"/>
+                              <Component id="markerClustererRadio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1324,7 +1327,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="gridBasedRadio" min="-2" pref="0" max="-2" attributes="0"/>
+                                  <Component id="markerClustererRadio" min="-2" pref="0" max="-2" attributes="0"/>
                                   <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -1335,10 +1338,10 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel25">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Grid-Based Clustering"/>
+                        <Property name="text" type="java.lang.String" value="MarkerClusterer"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="gridBasedRadio">
+                    <Component class="javax.swing.JRadioButton" name="markerClustererRadio">
                       <Properties>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1346,7 +1349,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="gridBasedRadioStateChanged"/>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="markerClustererRadioStateChanged"/>
                       </Events>
                     </Component>
                   </SubComponents>

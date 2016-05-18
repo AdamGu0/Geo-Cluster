@@ -16,7 +16,7 @@ import org.jxmapviewer.viewer.TileFactory;
  *
  * @author AdamGu0
  */
-public class GridBasedClustering {
+public class MarkerClusterer {
 
     private final MapKit mapKit;
     private Point[] data;
@@ -24,27 +24,27 @@ public class GridBasedClustering {
     private ArrayList<Cluster> clusters;
     public Cluster[] clustersArray;
     public long duration;
-    public boolean startGridBased = false;
+    public boolean startCluster = false;
 
-    public GridBasedClustering(MapKit mapKit) {
+    public MarkerClusterer(MapKit mapKit) {
         this.mapKit = mapKit;
     }
 
-    public int startGridBasedClustering(Point[] data, int gridSize) {
+    public int startMarkerCluster(Point[] data, int gridSize) {
         if (data == null) {
             return 1;
         } else if (data.length == 0) {
             return 2;
         }
-        this.startGridBased = true;
+        this.startCluster = true;
         this.gridSize = gridSize;
         this.data = data.clone();
-        doGridBasedClustering();
+        doMarkerCluster();
         return 0;
     }
 
-    public boolean doGridBasedClustering() {
-        if (!startGridBased) return startGridBased;
+    public boolean doMarkerCluster() {
+        if (!startCluster) return startCluster;
         
         long start = System.currentTimeMillis();
         this.clusters = new ArrayList<Cluster>();
@@ -62,7 +62,7 @@ public class GridBasedClustering {
         duration = System.currentTimeMillis() - start;
 
         mapKit.setWaypoints(clustersArray);
-        return startGridBased;
+        return startCluster;
     }
 
     private void addToClosestCluster(Point p) {

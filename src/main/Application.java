@@ -53,7 +53,7 @@ public class Application extends javax.swing.JFrame {
         kMeansRadio.setSelected(false);
         smartSwapRadio.setSelected(false);
         gridGrowingRadio.setSelected(false);
-        gridBasedRadio.setSelected(false);
+        markerClustererRadio.setSelected(false);
 
         setMapResultUpdate();
     }
@@ -143,21 +143,21 @@ public class Application extends javax.swing.JFrame {
         gridGrowingSelectPanel = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         gridGrowingRadio = new javax.swing.JRadioButton();
-        gridBasedPanel = new javax.swing.JPanel();
-        gridBasedSettingPanel = new javax.swing.JPanel();
+        markerClustererPanel = new javax.swing.JPanel();
+        markerClustererSettingPanel = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         gridSizeLabel = new javax.swing.JLabel();
         gridSizeSlider = new javax.swing.JSlider();
         gridBasedButton = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
-        gridBasedSelectPanel = new javax.swing.JPanel();
+        markerClustererSelectPanel = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
-        gridBasedRadio = new javax.swing.JRadioButton();
+        markerClustererRadio = new javax.swing.JRadioButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         normalDataMenuItem = new javax.swing.JMenuItem();
         gpsDataMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
+        exportMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -809,7 +809,7 @@ public class Application extends javax.swing.JFrame {
                 .addComponent(gridGrowingSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        gridBasedPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        markerClustererPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel19.setText("Grid Size:");
 
@@ -827,15 +827,15 @@ public class Application extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout gridBasedSettingPanelLayout = new javax.swing.GroupLayout(gridBasedSettingPanel);
-        gridBasedSettingPanel.setLayout(gridBasedSettingPanelLayout);
-        gridBasedSettingPanelLayout.setHorizontalGroup(
-            gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gridBasedSettingPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout markerClustererSettingPanelLayout = new javax.swing.GroupLayout(markerClustererSettingPanel);
+        markerClustererSettingPanel.setLayout(markerClustererSettingPanelLayout);
+        markerClustererSettingPanelLayout.setHorizontalGroup(
+            markerClustererSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(markerClustererSettingPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(markerClustererSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(gridBasedButton)
-                    .addGroup(gridBasedSettingPanelLayout.createSequentialGroup()
+                    .addGroup(markerClustererSettingPanelLayout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gridSizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -843,12 +843,12 @@ public class Application extends javax.swing.JFrame {
             .addComponent(gridSizeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator5)
         );
-        gridBasedSettingPanelLayout.setVerticalGroup(
-            gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridBasedSettingPanelLayout.createSequentialGroup()
+        markerClustererSettingPanelLayout.setVerticalGroup(
+            markerClustererSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, markerClustererSettingPanelLayout.createSequentialGroup()
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(gridBasedSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(markerClustererSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(gridSizeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -858,56 +858,56 @@ public class Application extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        gridBasedSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        markerClustererSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                gridBasedSelectPanelMouseReleased(evt);
+                markerClustererSelectPanelMouseReleased(evt);
             }
         });
 
-        jLabel25.setText("Grid-Based Clustering");
+        jLabel25.setText("MarkerClusterer");
 
-        gridBasedRadio.setSelected(true);
-        gridBasedRadio.setPreferredSize(new java.awt.Dimension(28, 28));
-        gridBasedRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+        markerClustererRadio.setSelected(true);
+        markerClustererRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        markerClustererRadio.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                gridBasedRadioStateChanged(evt);
+                markerClustererRadioStateChanged(evt);
             }
         });
 
-        javax.swing.GroupLayout gridBasedSelectPanelLayout = new javax.swing.GroupLayout(gridBasedSelectPanel);
-        gridBasedSelectPanel.setLayout(gridBasedSelectPanelLayout);
-        gridBasedSelectPanelLayout.setHorizontalGroup(
-            gridBasedSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gridBasedSelectPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout markerClustererSelectPanelLayout = new javax.swing.GroupLayout(markerClustererSelectPanel);
+        markerClustererSelectPanel.setLayout(markerClustererSelectPanelLayout);
+        markerClustererSelectPanelLayout.setHorizontalGroup(
+            markerClustererSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(markerClustererSelectPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(gridBasedRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(markerClustererRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        gridBasedSelectPanelLayout.setVerticalGroup(
-            gridBasedSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gridBasedSelectPanelLayout.createSequentialGroup()
+        markerClustererSelectPanelLayout.setVerticalGroup(
+            markerClustererSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(markerClustererSelectPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gridBasedSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gridBasedRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(markerClustererSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(markerClustererRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout gridBasedPanelLayout = new javax.swing.GroupLayout(gridBasedPanel);
-        gridBasedPanel.setLayout(gridBasedPanelLayout);
-        gridBasedPanelLayout.setHorizontalGroup(
-            gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gridBasedSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(gridBasedSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout markerClustererPanelLayout = new javax.swing.GroupLayout(markerClustererPanel);
+        markerClustererPanel.setLayout(markerClustererPanelLayout);
+        markerClustererPanelLayout.setHorizontalGroup(
+            markerClustererPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(markerClustererSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(markerClustererSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        gridBasedPanelLayout.setVerticalGroup(
-            gridBasedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gridBasedPanelLayout.createSequentialGroup()
-                .addComponent(gridBasedSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        markerClustererPanelLayout.setVerticalGroup(
+            markerClustererPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, markerClustererPanelLayout.createSequentialGroup()
+                .addComponent(markerClustererSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(gridBasedSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(markerClustererSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout settingPanelLayout = new javax.swing.GroupLayout(settingPanel);
@@ -920,7 +920,7 @@ public class Application extends javax.swing.JFrame {
                     .addComponent(kMeansPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(smartSwapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gridGrowingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gridBasedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(markerClustererPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dbScanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
@@ -936,7 +936,7 @@ public class Application extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gridGrowingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridBasedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(markerClustererPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -963,9 +963,14 @@ public class Application extends javax.swing.JFrame {
         });
         fileMenu.add(gpsDataMenuItem);
 
-        saveMenuItem.setMnemonic('a');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
+        exportMenuItem.setMnemonic('a');
+        exportMenuItem.setText("Export result");
+        exportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(exportMenuItem);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -1051,30 +1056,30 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void dbscanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbscanButtonActionPerformed
-        mapKit.gridBased.startGridBased = false;
+        mapKit.markerClusterer.startCluster = false;
         doDBScan();
     }//GEN-LAST:event_dbscanButtonActionPerformed
 
     private void kMeansButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kMeansButtonActionPerformed
-        mapKit.gridBased.startGridBased = false;
+        mapKit.markerClusterer.startCluster = false;
         doKMeans();
     }//GEN-LAST:event_kMeansButtonActionPerformed
 
     private void smartSwapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smartSwapButtonActionPerformed
-        mapKit.gridBased.startGridBased = false;
+        mapKit.markerClusterer.startCluster = false;
         doSmartSwap();
     }//GEN-LAST:event_smartSwapButtonActionPerformed
 
     private void gridGrowingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gridGrowingButtonActionPerformed
-        mapKit.gridBased.startGridBased = false;
+        mapKit.markerClusterer.startCluster = false;
         doGridGrowing();
     }//GEN-LAST:event_gridGrowingButtonActionPerformed
 
     private void gridBasedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gridBasedButtonActionPerformed
-        switch (mapKit.gridBased.startGridBasedClustering(data, gridSizeSlider.getValue())) {
+        switch (mapKit.markerClusterer.startMarkerCluster(data, gridSizeSlider.getValue())) {
             case 0:
                 this.tabbedViewerPanel.setSelectedIndex(2);
-                showResultInfo(mapKit.gridBased.clustersArray, mapKit.gridBased.duration, "Grid-Based");
+                showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "Grid-Based");
                 break;
             case 1:
                 showWarning("There is no data of points");
@@ -1151,19 +1156,19 @@ public class Application extends javax.swing.JFrame {
         gridGrowingRadio.setSelected(!gridGrowingRadio.isSelected());
     }//GEN-LAST:event_gridGrowingSelectPanelMouseReleased
 
-    private void gridBasedRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gridBasedRadioStateChanged
-        boolean selected = gridBasedRadio.isSelected();
-        gridBasedSettingPanel.setVisible(selected);
+    private void markerClustererRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_markerClustererRadioStateChanged
+        boolean selected = markerClustererRadio.isSelected();
+        markerClustererSettingPanel.setVisible(selected);
         if (selected) {
-            gridBasedPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+            markerClustererPanel.setBorder(BorderFactory.createLoweredBevelBorder());
         } else {
-            gridBasedPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+            markerClustererPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         }
-    }//GEN-LAST:event_gridBasedRadioStateChanged
+    }//GEN-LAST:event_markerClustererRadioStateChanged
 
-    private void gridBasedSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridBasedSelectPanelMouseReleased
-        gridBasedRadio.setSelected(!gridBasedRadio.isSelected());
-    }//GEN-LAST:event_gridBasedSelectPanelMouseReleased
+    private void markerClustererSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_markerClustererSelectPanelMouseReleased
+        markerClustererRadio.setSelected(!markerClustererRadio.isSelected());
+    }//GEN-LAST:event_markerClustererSelectPanelMouseReleased
 
     private void dbScanRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbScanRadioActionPerformed
         // TODO add your handling code here:
@@ -1172,6 +1177,10 @@ public class Application extends javax.swing.JFrame {
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         exportResult();
     }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void exportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportMenuItemActionPerformed
+        exportResult();
+    }//GEN-LAST:event_exportMenuItemActionPerformed
 
     private void setIsGPSData(boolean isGPSData) {
         if (isGPSData) {
@@ -1308,14 +1317,14 @@ public class Application extends javax.swing.JFrame {
     }
     
     private void mapResultUpdate() {
-        if (mapKit.gridBased.doGridBasedClustering()) {
-            showResultInfo(mapKit.gridBased.clustersArray, mapKit.gridBased.duration, "Grid-Based");
+        if (mapKit.markerClusterer.doMarkerCluster()) {
+            showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "Grid-Based");
         }
     }
 
     private void cleanResult() {
         resultClusters = null;
-        mapKit.gridBased.startGridBased = false;
+        mapKit.markerClusterer.startCluster = false;
         mapKit.setWaypoints(null);
         clusterPanel.clusters = null;
         
@@ -1625,14 +1634,11 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JTextField epsTextField;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton exportButton;
+    private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField fileTextField;
     private javax.swing.JMenuItem gpsDataMenuItem;
     private javax.swing.JButton gridBasedButton;
-    private javax.swing.JPanel gridBasedPanel;
-    private javax.swing.JRadioButton gridBasedRadio;
-    private javax.swing.JPanel gridBasedSelectPanel;
-    private javax.swing.JPanel gridBasedSettingPanel;
     private javax.swing.JButton gridGrowingButton;
     private javax.swing.JPanel gridGrowingPanel;
     private javax.swing.JRadioButton gridGrowingRadio;
@@ -1684,6 +1690,10 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JTextField kMeansTextField;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JTextField mTextField;
+    private javax.swing.JPanel markerClustererPanel;
+    private javax.swing.JRadioButton markerClustererRadio;
+    private javax.swing.JPanel markerClustererSelectPanel;
+    private javax.swing.JPanel markerClustererSettingPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField minPtsTextField;
     private javax.swing.JLabel mseLabel;
@@ -1693,7 +1703,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> optionComboBox;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel pointsLabel;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JPanel settingPanel;
     private javax.swing.JScrollPane settingScrollPane;
     private javax.swing.JButton smartSwapButton;

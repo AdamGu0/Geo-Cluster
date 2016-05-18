@@ -51,7 +51,7 @@ public class MapKit extends JXMapKit {
 
     private final MyWaypointPainter waypointPainter;
     private Set<MyWaypoint> waypoints;
-    public GridBasedClustering gridBased;
+    public MarkerClusterer markerClusterer;
 
     public MapKit() {
         super();
@@ -74,7 +74,7 @@ public class MapKit extends JXMapKit {
         waypointPainter = new MyWaypointPainter(this);
         waypointPainter.setRenderer(new MyWaypointRenderer());
         this.getMainMap().setOverlayPainter(waypointPainter);
-        gridBased = new GridBasedClustering(this);
+        markerClusterer = new MarkerClusterer(this);
     }
 
     public void setWaypoints(Cluster[] clusters) {
