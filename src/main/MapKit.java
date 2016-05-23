@@ -11,10 +11,6 @@ import java.awt.CompositeContext;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -49,7 +45,7 @@ import org.jxmapviewer.viewer.WaypointRenderer;
  */
 public class MapKit extends JXMapKit {
 
-    private final MyWaypointPainter waypointPainter;
+    private final WaypointPainter waypointPainter;
     private Set<MyWaypoint> waypoints;
     public MarkerClusterer markerClusterer;
 
@@ -71,7 +67,7 @@ public class MapKit extends JXMapKit {
         this.setZoom(9);
         this.setCenterPosition(shanghai);
 
-        waypointPainter = new MyWaypointPainter(this);
+        waypointPainter = new WaypointPainter();
         waypointPainter.setRenderer(new MyWaypointRenderer());
         this.getMainMap().setOverlayPainter(waypointPainter);
         markerClusterer = new MarkerClusterer(this);
@@ -114,15 +110,6 @@ class MyWaypoint extends DefaultWaypoint {
         } else {
             this.color = new Color(255, 0, 0, 252);
         }
-    }
-}
-
-class MyWaypointPainter extends WaypointPainter<MyWaypoint> {
-    private final MapKit mapKit;
-    
-    public MyWaypointPainter(MapKit mapKit) {
-        super();
-        this.mapKit = mapKit;
     }
 }
 

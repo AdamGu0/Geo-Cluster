@@ -20,7 +20,7 @@ public class Cluster implements Serializable {
     public Point centroid;       // centroid 
     private Point farthestPoint; // farthest point from centroid in cluster
     private int vectorSize;
-    public Rectangle2D gridBasedBounds;
+    public Rectangle2D gridBounds;
     public boolean isGPS;
 
     // constructor and inilization

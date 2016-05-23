@@ -46,7 +46,7 @@ public class Application extends javax.swing.JFrame {
         clusterPanel = new ClusterPanel(rd);
         tabbedViewerPanel.addTab("2D", clusterPanel);
         mapKit = new MapKit();
-        tabbedViewerPanel.addTab("GPS", mapKit);
+        tabbedViewerPanel.addTab("Geo", mapKit);
 
         //fold clustering panels
         dbScanRadio.setSelected(false);
@@ -148,7 +148,7 @@ public class Application extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         gridSizeLabel = new javax.swing.JLabel();
         gridSizeSlider = new javax.swing.JSlider();
-        gridBasedButton = new javax.swing.JButton();
+        markerClustererButton = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
         markerClustererSelectPanel = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
@@ -159,11 +159,6 @@ public class Application extends javax.swing.JFrame {
         gpsDataMenuItem = new javax.swing.JMenuItem();
         exportMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -171,7 +166,8 @@ public class Application extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Geo-Cluster");
 
-        stateLabel.setText(" ");
+        stateLabel.setText("   ");
+        stateLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         tabbedViewerPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -434,11 +430,6 @@ public class Application extends javax.swing.JFrame {
         dbScanRadio.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 dbScanRadioStateChanged(evt);
-            }
-        });
-        dbScanRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbScanRadioActionPerformed(evt);
             }
         });
 
@@ -819,11 +810,11 @@ public class Application extends javax.swing.JFrame {
         gridSizeSlider.setMinimum(30);
         gridSizeSlider.setValue(60);
 
-        gridBasedButton.setText("run");
-        gridBasedButton.setEnabled(false);
-        gridBasedButton.addActionListener(new java.awt.event.ActionListener() {
+        markerClustererButton.setText("run");
+        markerClustererButton.setEnabled(false);
+        markerClustererButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gridBasedButtonActionPerformed(evt);
+                markerClustererButtonActionPerformed(evt);
             }
         });
 
@@ -834,7 +825,7 @@ public class Application extends javax.swing.JFrame {
             .addGroup(markerClustererSettingPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(markerClustererSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(gridBasedButton)
+                    .addComponent(markerClustererButton)
                     .addGroup(markerClustererSettingPanelLayout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -854,7 +845,7 @@ public class Application extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gridSizeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridBasedButton)
+                .addComponent(markerClustererButton)
                 .addContainerGap())
         );
 
@@ -955,7 +946,8 @@ public class Application extends javax.swing.JFrame {
         fileMenu.add(normalDataMenuItem);
 
         gpsDataMenuItem.setMnemonic('s');
-        gpsDataMenuItem.setText("Open GPS data");
+        gpsDataMenuItem.setText("Open geo data");
+        gpsDataMenuItem.setToolTipText("");
         gpsDataMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gpsDataMenuItemActionPerformed(evt);
@@ -983,27 +975,6 @@ public class Application extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
@@ -1030,7 +1001,7 @@ public class Application extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tabbedViewerPanel))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1041,7 +1012,7 @@ public class Application extends javax.swing.JFrame {
                     .addComponent(tabbedViewerPanel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stateLabel)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabbedViewerPanel.getAccessibleContext().setAccessibleName("");
@@ -1075,22 +1046,22 @@ public class Application extends javax.swing.JFrame {
         doGridGrowing();
     }//GEN-LAST:event_gridGrowingButtonActionPerformed
 
-    private void gridBasedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gridBasedButtonActionPerformed
+    private void markerClustererButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markerClustererButtonActionPerformed
         switch (mapKit.markerClusterer.startMarkerCluster(data, gridSizeSlider.getValue())) {
             case 0:
                 this.tabbedViewerPanel.setSelectedIndex(2);
-                showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "Grid-Based");
+                showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "MarkerClusterer");
                 break;
             case 1:
-                showWarning("There is no data of points");
+                showWarning("There is no loaded file.");
                 break;
             case 2:
-                showWarning("There is no point!");
+                showWarning("There is no point.");
                 break;
             default:
                 break;
         }
-    }//GEN-LAST:event_gridBasedButtonActionPerformed
+    }//GEN-LAST:event_markerClustererButtonActionPerformed
 
     private void normalDataMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_normalDataMenuItemActionPerformed
         loadFile(false);
@@ -1170,10 +1141,6 @@ public class Application extends javax.swing.JFrame {
         markerClustererRadio.setSelected(!markerClustererRadio.isSelected());
     }//GEN-LAST:event_markerClustererSelectPanelMouseReleased
 
-    private void dbScanRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbScanRadioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dbScanRadioActionPerformed
-
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         exportResult();
     }//GEN-LAST:event_exportButtonActionPerformed
@@ -1189,7 +1156,7 @@ public class Application extends javax.swing.JFrame {
             dataTypeLabel.setText("Normal");
         }
         this.isGPSData = isGPSData;
-        gridBasedButton.setEnabled(isGPSData);
+        markerClustererButton.setEnabled(isGPSData);
     }
 
     private void showResultInfo(Cluster[] clusters, long duration, String algorithm) {
@@ -1318,7 +1285,7 @@ public class Application extends javax.swing.JFrame {
     
     private void mapResultUpdate() {
         if (mapKit.markerClusterer.doMarkerCluster()) {
-            showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "Grid-Based");
+            showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "MarkerClusterer");
         }
     }
 
@@ -1365,7 +1332,7 @@ public class Application extends javax.swing.JFrame {
 
                 if (rd.readData(dataFile, isGPSData)) // check the validity of data
                 {
-                    showWarning("");
+                    showWarning("File loaded.");
                     data = rd.getPoints();
                     fileName = file.getSelectedFile().getName();
                     //this.setTitle(fileName);
@@ -1375,7 +1342,7 @@ public class Application extends javax.swing.JFrame {
                     setIsGPSData(isGPSData);
                     cleanResult();
                 } else {
-                    showWarning("File is invalid!");
+                    showWarning("File is invalid.");
                 }
             }
         }
@@ -1385,17 +1352,17 @@ public class Application extends javax.swing.JFrame {
 
         //check the input data and parameters
         if (data == null) {
-            showWarning("There is no data of points.");
+            showWarning("There is no loaded file.");
             return;
         } else if (data.length == 0) {
-            showWarning("There is no point!");
+            showWarning("There is no point.");
             return;
         }
 
         //int dimension = 0;
         //dimension = data[0].vectorSize;
         if (minPtsTextField.getText().equals("") || epsTextField.getText().equals("")) {
-            showWarning("Please input the MinPts and Eps!");
+            showWarning("Please input the MinPts and Eps.");
             return;
         }
         //set the algorithm parameters
@@ -1452,15 +1419,15 @@ public class Application extends javax.swing.JFrame {
 
     private void doKMeans() {
         if (data == null) {
-            showWarning("There is no data of points");
+            showWarning("There is no loaded file.");
             return;
         } else if (data.length == 0) {
-            showWarning("There is no point!");
+            showWarning("There is no point.");
             return;
         }
 
         if (kMeansTextField.getText().equals("") || iterationsTextField.getText().equals("")) {
-            showWarning("Please input the number of clusters and steps!");
+            showWarning("Please input the number of clusters and steps.");
             return;
         }
 
@@ -1482,21 +1449,21 @@ public class Application extends javax.swing.JFrame {
             //save the Kmeans cluster point in json file, for drawing point on googlemap
             //saveCluster(preFileName+"_KMeans", clusters, clusters.length);
         } else {
-            showWarning("There is no data of points");
+            showWarning("There is no loaded file.");
         }
     }
 
     private void doSmartSwap() {
         if (data == null) {
-            showWarning("There is no data of points");
+            showWarning("There is no loaded file.");
             return;
         } else if (data.length == 0) {
-            showWarning("There is no point!");
+            showWarning("There is no point.");
             return;
         }
 
         if (smartSwapTextField.getText().equals("")) {
-            showWarning("Please input the number of cluster!");
+            showWarning("Please input the number of cluster.");
             return;
         }
 
@@ -1517,27 +1484,27 @@ public class Application extends javax.swing.JFrame {
             //save the SmartSwap cluster point in json file, for drawing point on googlemap
             //saveCluster(preFileName+"_SmartSwap", clusters, clusters.length);    
         } else {
-            showWarning("There is no data of points");
+            showWarning("There is no loaded file.");
         }
     }
 
     public void doGridGrowing() {
         //check the input data and parameters
         if (data == null) {
-            showWarning("There is no data of points");
+            showWarning("There is no loaded file.");
             return;
         } else if (data.length == 0) {
-            showWarning("There is no point!");
+            showWarning("There is no point.");
             return;
         }
 
         if (mTextField.getText().equals("") || nxTextField.getText().equals("") || nyTextField.getText().equals("")) {
-            showWarning("Please input all the parameters!");
+            showWarning("Please input all the parameters.");
             return;
         }
 
         if (Integer.parseInt(mTextField.getText()) < 1) {
-            showWarning("The parameter of M is wrong!");
+            showWarning("The parameter of M is wrong.");
             return;
         }
 
@@ -1620,17 +1587,13 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel chLabel;
     private javax.swing.JLabel clustersLabel;
     private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JLabel dataTypeLabel;
     private javax.swing.JPanel dbScanPanel;
     private javax.swing.JRadioButton dbScanRadio;
     private javax.swing.JPanel dbScanSelectPanel;
     private javax.swing.JPanel dbScanSettingPanel;
     private javax.swing.JButton dbscanButton;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JLabel dimensionsLabel;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JTextField epsTextField;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JButton exportButton;
@@ -1638,7 +1601,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField fileTextField;
     private javax.swing.JMenuItem gpsDataMenuItem;
-    private javax.swing.JButton gridBasedButton;
     private javax.swing.JButton gridGrowingButton;
     private javax.swing.JPanel gridGrowingPanel;
     private javax.swing.JRadioButton gridGrowingRadio;
@@ -1690,6 +1652,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JTextField kMeansTextField;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JTextField mTextField;
+    private javax.swing.JButton markerClustererButton;
     private javax.swing.JPanel markerClustererPanel;
     private javax.swing.JRadioButton markerClustererRadio;
     private javax.swing.JPanel markerClustererSelectPanel;
@@ -1701,7 +1664,6 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JTextField nxTextField;
     private javax.swing.JTextField nyTextField;
     private javax.swing.JComboBox<String> optionComboBox;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel pointsLabel;
     private javax.swing.JPanel settingPanel;
     private javax.swing.JScrollPane settingScrollPane;

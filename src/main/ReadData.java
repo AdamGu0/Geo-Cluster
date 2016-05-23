@@ -22,11 +22,6 @@ public class ReadData {
         this.points = null;
         this.vectorSize = 0;
     }
-
-    //deprecated
-    public boolean readData(File filedata) {
-        return false;
-    }
     
     /**
      * read file and extract data point return false if data format
@@ -47,32 +42,36 @@ public class ReadData {
             String line;
             boolean firstFlag = true; // used for initilizing the bounding box value
 
+            readline:
             while ((line = br.readLine()) != null) {
+                lineNo++;
                 line = line.trim();
+                if (line.length() < 3) {
+                    continue;
+                }
                 if (firstFlag) {
                     seperator = checkSeperator(line);
                     vectorSize = checkVectorSize(line, seperator);
                 }
-                if (line.length() < 2) {
-                    continue;
-                }
+
 
                 String[] row = line.split(seperator);
+                if (row.length != vectorSize) {
+                    continue;
+                }
                 vectors = new double[vectorSize];
                 vectorIndex = 0;
-                lineNo++;
                 for (String row1 : row) {
                     if (!checkData(row1)) {
                         System.out.println("Data formate error at line number: " + lineNo);
-                        return false;
+                        continue readline;
                     }
                     vectors[vectorIndex] = Double.parseDouble(row1);
                     vectorIndex++;
                 }
-                if (row.length > 1) {
-                    point = new Point(vectors, isGPS);
-                    pointList.add(point);
-                }
+
+                point = new Point(vectors, isGPS);
+                pointList.add(point);
 
                 if (firstFlag) {
                     firstFlag = false;
@@ -105,6 +104,9 @@ public class ReadData {
             System.out.println(e.getStackTrace());
         }
 
+        if (pointList.isEmpty()) {
+            return false;
+        }
         points = convertPoints(pointList);
         isGPSData = isGPS;
         return true;
@@ -116,18 +118,7 @@ public class ReadData {
      * @param line
      * @return
      */
-    private String checkSeperator(String line) {
-//	 String seperator = " ";
-//	   int index1 = line.indexOf(",");
-//	   int index2 = line.indexOf(" ");
-//
-//	   if(index1 > 0)
-//	     seperator = ","; // comma
-//	   else if(index2 > 0)
-//	     seperator = " "; // white space
-//	   
-//	   return seperator; 
-
+    private String checkSeperator(String line) { 
         int startIndex = -1;
         int endIndex = -1;
         for (int i = 0; i < line.length(); i++) {
@@ -160,8 +151,8 @@ public class ReadData {
         return size;
 
     }
+    
     // check the validity of data
-
     private boolean checkData(String s) {
         try {
             double d = Double.parseDouble(s);
@@ -170,21 +161,8 @@ public class ReadData {
         }
         return true;
     }
-
-    //check DataLocation
-    private boolean checkDataLocation(String[] row) {
-        try {
-            double x = Double.parseDouble(row[0]);
-            double y = Double.parseDouble(row[1]);
-            int speed = Integer.parseInt(row[2]);
-            int angel = Integer.parseInt(row[3]);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
+    
     // convert arrayList to points array
-
     private Point[] convertPoints(ArrayList arrayList) {
         int i;
         int len = arrayList.size();

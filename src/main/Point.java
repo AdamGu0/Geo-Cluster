@@ -40,7 +40,7 @@ public class Point implements Serializable {
         return s;
     }
     
-    public double getGeoDistance(Point p) { // d in kilo
+    private double getGeoDistance(Point p) { // d in kilo
         double R = 6371; // Radius of the Earth in km
         double dLat = (this.vectors[1] - p.vectors[1]) * Math.PI / 180;
         double dLon = (this.vectors[0] - p.vectors[0]) * Math.PI / 180;

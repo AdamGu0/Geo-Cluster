@@ -71,14 +71,14 @@ public class MarkerClusterer {
         Cluster clusterToAdd = null;
         for (Cluster c : clusters) {
             Point center = c.centroid;
-            double d = center.getGeoDistance(p);
+            double d = center.getDistance(p);
             if (d < distance) {
                 distance = d;
                 clusterToAdd = c;
             }
         }
 
-        if ((clusterToAdd != null) && containsGeoPoint(clusterToAdd.gridBasedBounds, p)) {
+        if ((clusterToAdd != null) && containsGeoPoint(clusterToAdd.gridBounds, p)) {
             addPoint(clusterToAdd, p);
         } else {
             Cluster cluster = new Cluster(true, 2);
@@ -94,7 +94,7 @@ public class MarkerClusterer {
         Point center = cluster.centroid;
         GeoPosition centerPosition = new GeoPosition(center.vectors[1], center.vectors[0]);
         Point2D p1 = mapKit.getMainMap().getTileFactory().geoToPixel(centerPosition, mapKit.getMainMap().getZoom());
-        cluster.gridBasedBounds = getExtentedGeoBounds(new Rectangle((int)(p1.getX()), (int)(p1.getY()), 0, 0));
+        cluster.gridBounds = getExtentedGeoBounds(new Rectangle((int)(p1.getX()), (int)(p1.getY()), 0, 0));
     }
 
     private Rectangle2D getExtentedGeoBounds(Rectangle bounds) {
