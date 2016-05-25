@@ -30,6 +30,20 @@ public class ClusterData {
         GLAIndex = new int[len];
         NearestArray = new double[len];
     }
+    
+    public static Cluster[] getClustersFromIndex(Cluster[] indexCluster, Point[] data, boolean isGPS) {
+        int length = indexCluster.length;
+        Cluster[] trueClusters = new Cluster[length];
+        for (int i = 0; i < length; i++) {
+            Cluster cluster = new Cluster(isGPS, data[0].vectors.length);
+            for (Point p : indexCluster[i].pointsList) {
+                cluster.pointsList.add(data[p.index]);
+            }
+            cluster.calcCentroid(new Point(isGPS));
+            trueClusters[i] = cluster;
+        }
+        return trueClusters;
+    }
 
     public static double calcSSB(Cluster[] clusters, boolean isGPS) {
         double SSB = 0.0;

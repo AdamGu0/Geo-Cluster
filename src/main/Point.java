@@ -13,6 +13,7 @@ public class Point implements Serializable {
     public double[] vectors; // conation multi-dimension value
     public static String gPointString = "";
     public boolean isGPS;
+    public int index = -1;
     
     // construct point object
     public Point(double[] _vectors, boolean isGPS) {
@@ -29,6 +30,7 @@ public class Point implements Serializable {
         return d * Math.PI / 180.0;
     }
 
+    //not used
     public double getDistance_(Point point) { // d in meter
         double radLat1 = rad(this.vectors[1]);
         double radLat2 = rad(point.vectors[1]);
@@ -85,6 +87,9 @@ public class Point implements Serializable {
         } else {
             point = new Point(vectors, this.isGPS);
         }
+
+        point.index = index;
+
         return point;
     }
 

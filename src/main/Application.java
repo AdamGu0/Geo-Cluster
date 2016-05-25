@@ -8,6 +8,8 @@ package main;
 import DBscan.DBScan;
 import DBscan.Tuple;
 import gridgrowing.GridClustering;
+import spectralclustering.SpectralClustering;
+import hierarchicalclustering.HierarchicalClustering;
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -54,6 +56,8 @@ public class Application extends javax.swing.JFrame {
         smartSwapRadio.setSelected(false);
         gridGrowingRadio.setSelected(false);
         markerClustererRadio.setSelected(false);
+        spectralRadio.setSelected(false);
+        hierarchicalRadio.setSelected(false);
 
         setMapResultUpdate();
     }
@@ -153,6 +157,26 @@ public class Application extends javax.swing.JFrame {
         markerClustererSelectPanel = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         markerClustererRadio = new javax.swing.JRadioButton();
+        spectralPanel = new javax.swing.JPanel();
+        spectralSettingPanel = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        spectralKTextField = new javax.swing.JTextField();
+        spectralIterationsTextField = new javax.swing.JTextField();
+        spectralButton = new javax.swing.JButton();
+        jSeparator13 = new javax.swing.JSeparator();
+        spectralSelectPanel = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        spectralRadio = new javax.swing.JRadioButton();
+        hierarchicalPanel = new javax.swing.JPanel();
+        hierarchicalSettingPanel = new javax.swing.JPanel();
+        jLabel45 = new javax.swing.JLabel();
+        hierarchicalTextField = new javax.swing.JTextField();
+        hierarchicalButton = new javax.swing.JButton();
+        jSeparator14 = new javax.swing.JSeparator();
+        hierarchicalSelectPanel = new javax.swing.JPanel();
+        jLabel46 = new javax.swing.JLabel();
+        hierarchicalRadio = new javax.swing.JRadioButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         normalDataMenuItem = new javax.swing.JMenuItem();
@@ -495,12 +519,12 @@ public class Application extends javax.swing.JFrame {
                 .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kMeansSettingPanelLayout.createSequentialGroup()
                         .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(kMeansTextField)
-                            .addComponent(iterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(kMeansSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(iterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kMeansTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kMeansSettingPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(kMeansButton)))
@@ -872,7 +896,7 @@ public class Application extends javax.swing.JFrame {
             .addGroup(markerClustererSelectPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(markerClustererRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -891,7 +915,7 @@ public class Application extends javax.swing.JFrame {
         markerClustererPanelLayout.setHorizontalGroup(
             markerClustererPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(markerClustererSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(markerClustererSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(markerClustererSelectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         markerClustererPanelLayout.setVerticalGroup(
             markerClustererPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -901,18 +925,222 @@ public class Application extends javax.swing.JFrame {
                 .addComponent(markerClustererSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        spectralPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        jLabel40.setText("K");
+
+        jLabel41.setText("Iterations");
+
+        spectralKTextField.setText("15");
+
+        spectralIterationsTextField.setText("100");
+
+        spectralButton.setText("run");
+        spectralButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spectralButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout spectralSettingPanelLayout = new javax.swing.GroupLayout(spectralSettingPanel);
+        spectralSettingPanel.setLayout(spectralSettingPanelLayout);
+        spectralSettingPanelLayout.setHorizontalGroup(
+            spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, spectralSettingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(spectralSettingPanelLayout.createSequentialGroup()
+                        .addGroup(spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(spectralIterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spectralKTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, spectralSettingPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(spectralButton)))
+                .addContainerGap())
+            .addComponent(jSeparator13)
+        );
+        spectralSettingPanelLayout.setVerticalGroup(
+            spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, spectralSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
+                    .addComponent(spectralKTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(spectralSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41)
+                    .addComponent(spectralIterationsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spectralButton)
+                .addContainerGap())
+        );
+
+        spectralSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                spectralSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel44.setText("Spectral Clustering");
+
+        spectralRadio.setSelected(true);
+        spectralRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        spectralRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spectralRadioStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout spectralSelectPanelLayout = new javax.swing.GroupLayout(spectralSelectPanel);
+        spectralSelectPanel.setLayout(spectralSelectPanelLayout);
+        spectralSelectPanelLayout.setHorizontalGroup(
+            spectralSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(spectralSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(spectralRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        spectralSelectPanelLayout.setVerticalGroup(
+            spectralSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(spectralSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(spectralSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel44)
+                    .addComponent(spectralRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout spectralPanelLayout = new javax.swing.GroupLayout(spectralPanel);
+        spectralPanel.setLayout(spectralPanelLayout);
+        spectralPanelLayout.setHorizontalGroup(
+            spectralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(spectralSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(spectralSelectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        spectralPanelLayout.setVerticalGroup(
+            spectralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, spectralPanelLayout.createSequentialGroup()
+                .addComponent(spectralSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(spectralSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        hierarchicalPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        jLabel45.setText("K");
+
+        hierarchicalTextField.setText("10");
+
+        hierarchicalButton.setText("run");
+        hierarchicalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hierarchicalButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hierarchicalSettingPanelLayout = new javax.swing.GroupLayout(hierarchicalSettingPanel);
+        hierarchicalSettingPanel.setLayout(hierarchicalSettingPanelLayout);
+        hierarchicalSettingPanelLayout.setHorizontalGroup(
+            hierarchicalSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hierarchicalSettingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(hierarchicalSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hierarchicalSettingPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hierarchicalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hierarchicalSettingPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(hierarchicalButton)))
+                .addContainerGap())
+        );
+        hierarchicalSettingPanelLayout.setVerticalGroup(
+            hierarchicalSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hierarchicalSettingPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(hierarchicalSettingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel45)
+                    .addComponent(hierarchicalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hierarchicalButton)
+                .addContainerGap())
+        );
+
+        hierarchicalSelectPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                hierarchicalSelectPanelMouseReleased(evt);
+            }
+        });
+
+        jLabel46.setText("Hierarchical Clustering");
+
+        hierarchicalRadio.setSelected(true);
+        hierarchicalRadio.setPreferredSize(new java.awt.Dimension(28, 28));
+        hierarchicalRadio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                hierarchicalRadioStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hierarchicalSelectPanelLayout = new javax.swing.GroupLayout(hierarchicalSelectPanel);
+        hierarchicalSelectPanel.setLayout(hierarchicalSelectPanelLayout);
+        hierarchicalSelectPanelLayout.setHorizontalGroup(
+            hierarchicalSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hierarchicalSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hierarchicalRadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        hierarchicalSelectPanelLayout.setVerticalGroup(
+            hierarchicalSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hierarchicalSelectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(hierarchicalSelectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hierarchicalRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel46))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout hierarchicalPanelLayout = new javax.swing.GroupLayout(hierarchicalPanel);
+        hierarchicalPanel.setLayout(hierarchicalPanelLayout);
+        hierarchicalPanelLayout.setHorizontalGroup(
+            hierarchicalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(hierarchicalSettingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(hierarchicalSelectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        hierarchicalPanelLayout.setVerticalGroup(
+            hierarchicalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hierarchicalPanelLayout.createSequentialGroup()
+                .addComponent(hierarchicalSelectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(hierarchicalSettingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout settingPanelLayout = new javax.swing.GroupLayout(settingPanel);
         settingPanel.setLayout(settingPanelLayout);
         settingPanelLayout.setHorizontalGroup(
             settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(kMeansPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(smartSwapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gridGrowingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(markerClustererPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dbScanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(hierarchicalPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(kMeansPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(smartSwapPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gridGrowingPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(markerClustererPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dbScanPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spectralPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
         settingPanelLayout.setVerticalGroup(
@@ -928,6 +1156,10 @@ public class Application extends javax.swing.JFrame {
                 .addComponent(gridGrowingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(markerClustererPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spectralPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hierarchicalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -998,9 +1230,9 @@ public class Application extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(settingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(stateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tabbedViewerPanel))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tabbedViewerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1149,6 +1381,44 @@ public class Application extends javax.swing.JFrame {
         exportResult();
     }//GEN-LAST:event_exportMenuItemActionPerformed
 
+    private void spectralButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spectralButtonActionPerformed
+        mapKit.markerClusterer.startCluster = false;
+        doSpectral();
+    }//GEN-LAST:event_spectralButtonActionPerformed
+
+    private void spectralRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spectralRadioStateChanged
+        boolean selected = spectralRadio.isSelected();
+        spectralSettingPanel.setVisible(selected);
+        if (selected) {
+            spectralPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            spectralPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_spectralRadioStateChanged
+
+    private void spectralSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spectralSelectPanelMouseReleased
+        spectralRadio.setSelected(!spectralRadio.isSelected());
+    }//GEN-LAST:event_spectralSelectPanelMouseReleased
+
+    private void hierarchicalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hierarchicalButtonActionPerformed
+        mapKit.markerClusterer.startCluster = false;
+        doHierarchical();
+    }//GEN-LAST:event_hierarchicalButtonActionPerformed
+
+    private void hierarchicalRadioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hierarchicalRadioStateChanged
+        boolean selected = hierarchicalRadio.isSelected();
+        hierarchicalSettingPanel.setVisible(selected);
+        if (selected) {
+            hierarchicalPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        } else {
+            hierarchicalPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        }
+    }//GEN-LAST:event_hierarchicalRadioStateChanged
+
+    private void hierarchicalSelectPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hierarchicalSelectPanelMouseReleased
+        hierarchicalRadio.setSelected(!hierarchicalRadio.isSelected());
+    }//GEN-LAST:event_hierarchicalSelectPanelMouseReleased
+
     private void setIsGPSData(boolean isGPSData) {
         if (isGPSData) {
             dataTypeLabel.setText("GPS");
@@ -1163,29 +1433,29 @@ public class Application extends javax.swing.JFrame {
         resultClusters = clusters;
         this.algorithm = algorithm;
         String a = algorithm + " Clustering";
-        
+
         int length = clusters.length;
         String str = "Algorithm: " + a + "\n\nThere are " + length + " clusters.\nCenters:\n";
         for (int i = 0; i < length; i++) {
             str += (i + 1) + ". " + clusters[i].centroid.toString() + "\n";
         }
-        
+
         //get the mse
         double ssdAll = 0;
         for (Cluster c : clusters) {
             ssdAll += c.calcSsd();
         }
         double mse = ssdAll / data.length;
-        
+
         //get the CH
         double ch = 0;
         if (length > 1) {
-            double SSB = ClusterData.calcSSB(clusters, rd.isGPSData);
+            double SSB = ClusterData.calcSSB(clusters, isGPSData);
             if (length != 1) {
                 ch = (SSB / (length - 1)) / mse; //why -1?
             }
         }
-        
+
         algorithmLabel.setText(a);
         clustersLabel.setText(String.valueOf(length));
         mseLabel.setText(String.valueOf(mse));
@@ -1194,15 +1464,15 @@ public class Application extends javax.swing.JFrame {
         stateLabel.setText("Clusters:" + length + " MSE:" + mse + " CH:" + ch + " Time:" + duration + "ms");
         logTextArea.setText(str + "\nMSE:" + mse + "\nCH:" + ch + "\nTime:" + duration + "ms\n");
     }
-    
+
     private void showResult(Cluster[] clusters) {
-        if (rd.isGPSData) {
+        if (isGPSData) {
             tabbedViewerPanel.setSelectedIndex(2);
             mapKit.setWaypoints(clusters);
             clusterPanel.clusters = null;
             return;
         }
-        
+
         mapKit.setWaypoints(null);
         if (rd.getVectorSize() != 2) {
             tabbedViewerPanel.setSelectedIndex(0);
@@ -1212,7 +1482,7 @@ public class Application extends javax.swing.JFrame {
             clusterPanel.showClusters(clusters);
         }
     }
-    
+
     private void exportResult() {
         if (resultClusters == null) {
             showWarning("There is no result.");
@@ -1234,8 +1504,8 @@ public class Application extends javax.swing.JFrame {
         }
 
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-	String presentTime = df.format(new Date());
-        
+        String presentTime = df.format(new Date());
+
         String exportedFileName = fileName.substring(0, fileName.length() - 4) + "_" + algorithm + "_" + presentTime + ".json";
         try {
             FileOutputStream os = new FileOutputStream("data_export/" + exportedFileName);
@@ -1249,7 +1519,7 @@ public class Application extends javax.swing.JFrame {
             showWarning("File operation failed.");
         }
     }
-    
+
     private void setMapResultUpdate() {
         mapKit.getMainMap().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -1282,7 +1552,7 @@ public class Application extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void mapResultUpdate() {
         if (mapKit.markerClusterer.doMarkerCluster()) {
             showResultInfo(mapKit.markerClusterer.clustersArray, mapKit.markerClusterer.duration, "MarkerClusterer");
@@ -1294,7 +1564,7 @@ public class Application extends javax.swing.JFrame {
         mapKit.markerClusterer.startCluster = false;
         mapKit.setWaypoints(null);
         clusterPanel.clusters = null;
-        
+
         algorithm = null;
         String na = "N/A";
         algorithmLabel.setText(na);
@@ -1305,7 +1575,7 @@ public class Application extends javax.swing.JFrame {
         stateLabel.setText("");
         logTextArea.setText("");
     }
-    
+
     private void loadFile(boolean isGPSData) {
         FileFilter filter;
         filter = new FileFilter() {
@@ -1373,7 +1643,7 @@ public class Application extends javax.swing.JFrame {
         DBScan dbscanAlgorithm = new DBScan();
         List<Tuple> tuples = new ArrayList<Tuple>();
         for (Point data1 : data) {
-            tuples.add(new Tuple(rd.isGPSData, data1.vectors[0], data1.vectors[1]));
+            tuples.add(new Tuple(isGPSData, data1.vectors[0], data1.vectors[1]));
         }
         dbscanAlgorithm.setDataObjectsAndBuildRTree(tuples);
         dbscanAlgorithm.checkCorePoints();
@@ -1383,7 +1653,7 @@ public class Application extends javax.swing.JFrame {
         //get the clusters to be shown according to the result of 'dbscanAlgorithm.dbscan()'
         Cluster[] clusters = new Cluster[clusterNumber];
         for (int i = 0; i < clusterNumber; i++) {
-            clusters[i] = new Cluster(rd.isGPSData, data[0].vectors.length);
+            clusters[i] = new Cluster(isGPSData, data[0].vectors.length);
             //clusters[i].setVectorSize(data[0].vectorSize);  //actually, it is the dimension of data(2)
             clusters[i].setVectorSize(2);
             //TODO: how to calculate the centroid?????
@@ -1402,12 +1672,12 @@ public class Application extends javax.swing.JFrame {
                 double[] d = new double[2];
                 d[0] = tuple.xValue;
                 d[1] = tuple.yValue;
-                clusters[tuple.clusterID - 1].pointsList.add(new Point(d, rd.isGPSData));
+                clusters[tuple.clusterID - 1].pointsList.add(new Point(d, isGPSData));
             }
         }
         // not sure if it is correct to set the centroid this way
         for (int i = 0; i < clusterNumber; i++) {
-            clusters[i].calcCentroid(new Point(rd.isGPSData));
+            clusters[i].calcCentroid(new Point(isGPSData));
         }
 
         showResultInfo(clusters, duration, "DBScan");
@@ -1437,7 +1707,7 @@ public class Application extends javax.swing.JFrame {
             long start, end, duration; // start, end and duration of clustering method
             k = Integer.parseInt(kMeansTextField.getText());
             kIterations = Integer.parseInt(iterationsTextField.getText());
-            ClusterData cd = new ClusterData(data, rd.isGPSData);
+            ClusterData cd = new ClusterData(data, isGPSData);
             start = System.currentTimeMillis();
             Cluster[] clusters = cd.kmeans(k, kIterations);
             end = System.currentTimeMillis();
@@ -1472,12 +1742,12 @@ public class Application extends javax.swing.JFrame {
             long start, end, duration; // start, end and duration of clustering method
 
             k = Integer.parseInt(smartSwapTextField.getText());
-            ClusterData cd = new ClusterData(data, rd.isGPSData);
+            ClusterData cd = new ClusterData(data, isGPSData);
             start = System.currentTimeMillis();
             Cluster[] clusters = cd.smartSwap(k);
             end = System.currentTimeMillis();
             duration = end - start;
-            
+
             showResultInfo(clusters, duration, "SmartSwap");
             showResult(clusters);
 
@@ -1536,7 +1806,7 @@ public class Application extends javax.swing.JFrame {
 
         Cluster[] clusters = new Cluster[gc.clustersNumber];
         for (int i = 0; i < gc.clustersNumber; i++) {
-            clusters[i] = new Cluster(rd.isGPSData, data[0].vectors.length);
+            clusters[i] = new Cluster(isGPSData, data[0].vectors.length);
         }
         for (int i = 0; i < gc.data.length; i++) {
             if (gc.data[i].clusterID > 0) {
@@ -1544,7 +1814,7 @@ public class Application extends javax.swing.JFrame {
                 double d[] = new double[2];
                 d[0] = gc.data[i].xValue;
                 d[1] = gc.data[i].yValue;
-                main.Point point = new main.Point(d, rd.isGPSData);
+                main.Point point = new main.Point(d, isGPSData);
                 clusters[gc.data[i].clusterID - 1].pointsList.add(point);
             }
         }
@@ -1552,20 +1822,102 @@ public class Application extends javax.swing.JFrame {
         //clean empty clusters by AdamGu0
         ArrayList<Cluster> clusterList = new ArrayList<>();
         for (Cluster c : clusters) {
-            if (c.pointsList.isEmpty()) continue;
-            c.calcCentroid(new Point(rd.isGPSData));
+            if (c.pointsList.isEmpty()) {
+                continue;
+            }
+            c.calcCentroid(new Point(isGPSData));
             clusterList.add(c);
         }
         clusters = new Cluster[clusterList.size()];
         for (int i = 0; i < clusterList.size(); i++) {
             clusters[i] = clusterList.get(i);
         }
-        
+
         showResultInfo(clusters, duration, "GridGrowing");
         showResult(clusters);
 
         //save the GridGrowing cluster point in json file, for drawing point on googlemap
         // saveCluster(preFileName+"_GridGrowing", clusters, clusters.length);
+    }
+
+    private void doSpectral() {
+        if (data == null) {
+            showWarning("There is no loaded file.");
+            return;
+        } else if (data.length == 0) {
+            showWarning("There is no point.");
+            return;
+        }
+
+        if (spectralKTextField.getText().equals("") || spectralIterationsTextField.getText().equals("")) {
+            showWarning("Please input the number of clusters and steps.");
+            return;
+        }
+
+        if (data != null) {
+            int k;  // number of clusters
+            int kIterations; // iterations for kmeans
+            long start, duration; // start, end and duration of clustering method
+
+            k = Integer.parseInt(spectralKTextField.getText());
+            kIterations = Integer.parseInt(spectralIterationsTextField.getText());
+            start = System.currentTimeMillis();
+
+            SpectralClustering sc = new SpectralClustering(k, data, isGPSData);
+            Point[] indexResult = sc.getResltMartix();  // N * k
+
+            ClusterData cd = new ClusterData(indexResult, isGPSData);
+            cd.kmeans(k, kIterations);
+            Cluster[] indexClusters = cd.clusters;
+            Cluster[] clusters = ClusterData.getClustersFromIndex(indexClusters, rd.getPoints(), isGPSData);
+
+            duration = System.currentTimeMillis() - start;
+            showResultInfo(clusters, duration, "Spectral");
+            showResult(clusters);
+
+            //String preFileName = fileName.substring(0, fileName.length() - 4);
+            //// OutputData(String file_name, int K, Cluster[] clusters, int data_number)
+            //OutputData out = new OutputData(preFileName, k, indexClusters, indexResult.length, data);
+            //out.outSpectralData();
+            //double totalMSE = out.calcTotalMSE();
+            //out.OutputMSE("./data_result/SpectralCluster/", totalMSE);
+        } else {
+            showWarning("There is no loaded file.");
+        }
+    }
+
+    private void doHierarchical() {
+        if (data == null) {
+            showWarning("There is no loaded file.");
+            return;
+        } else if (data.length == 0) {
+            showWarning("There is no point.");
+            return;
+        }
+        int k;
+
+        try {
+            k = Integer.parseInt(hierarchicalTextField.getText());
+        } catch (Exception e) {
+            showWarning("Please input the number of cluster.");
+            return;
+        }
+
+        if (data != null) {
+            long start = System.currentTimeMillis();
+            HierarchicalClustering hc = new HierarchicalClustering(k, data, isGPSData);
+            hc.doCluster();
+            Cluster[] clusters = hc.getCluster();
+            long duration = System.currentTimeMillis() - start;
+            showResultInfo(clusters, duration, "Hierarchical");
+            showResult(clusters);
+
+            //double totalMSE = hc.calcTotalMSE();
+            //OutputData out = new OutputData(fileName, k, hc.hclusters, data.length);
+            //out.outHierarchicalData(totalMSE);
+        } else {
+            showWarning("There is no loaded file.");
+        }
     }
 
     private void showWarning(String text) {
@@ -1609,6 +1961,12 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel gridSizeLabel;
     private javax.swing.JSlider gridSizeSlider;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton hierarchicalButton;
+    private javax.swing.JPanel hierarchicalPanel;
+    private javax.swing.JRadioButton hierarchicalRadio;
+    private javax.swing.JPanel hierarchicalSelectPanel;
+    private javax.swing.JPanel hierarchicalSettingPanel;
+    private javax.swing.JTextField hierarchicalTextField;
     private javax.swing.JTextField iterationsTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1630,6 +1988,11 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1640,6 +2003,8 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1673,6 +2038,13 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JPanel smartSwapSelectPanel;
     private javax.swing.JPanel smartSwapSettingPanel;
     private javax.swing.JTextField smartSwapTextField;
+    private javax.swing.JButton spectralButton;
+    private javax.swing.JTextField spectralIterationsTextField;
+    private javax.swing.JTextField spectralKTextField;
+    private javax.swing.JPanel spectralPanel;
+    private javax.swing.JRadioButton spectralRadio;
+    private javax.swing.JPanel spectralSelectPanel;
+    private javax.swing.JPanel spectralSettingPanel;
     private javax.swing.JLabel stateLabel;
     private javax.swing.JTabbedPane tabbedViewerPanel;
     private javax.swing.JLabel timeLabel;
