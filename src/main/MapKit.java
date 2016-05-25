@@ -85,7 +85,14 @@ public class MapKit extends JXMapKit {
             }
         }
         waypointPainter.setWaypoints(waypoints);
-        this.repaint();
+    }
+    
+    public void adjustMapByWaypoints() {
+        Set<GeoPosition> positions = new HashSet<>(waypoints.size() * 2);
+        for (MyWaypoint w : waypoints) {
+            positions.add(w.getPosition());
+        }
+        getMainMap().zoomToBestFit(positions, 0.9);
     }
 }
 

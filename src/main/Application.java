@@ -1469,6 +1469,7 @@ public class Application extends javax.swing.JFrame {
         if (isGPSData) {
             tabbedViewerPanel.setSelectedIndex(2);
             mapKit.setWaypoints(clusters);
+            mapKit.adjustMapByWaypoints();
             clusterPanel.clusters = null;
             return;
         }

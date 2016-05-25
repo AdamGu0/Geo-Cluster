@@ -62,6 +62,7 @@ public class MarkerClusterer {
         duration = System.currentTimeMillis() - start;
 
         mapKit.setWaypoints(clustersArray);
+        mapKit.repaint();
         return startCluster;
     }
 
