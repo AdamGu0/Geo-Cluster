@@ -10,12 +10,9 @@ public class HCluster {
 
     public double[] centroid;
 
-    public Integer mNumPointsInClusters;
-
     public HCluster(int index, double[] center, boolean isGPS) {
         this.isGPS = isGPS;
         pointsIndexList = new ArrayList<Integer>();
-        pointsIndexList.clear();
         pointsIndexList.add(index);
 
         int dimension = center.length;
@@ -23,9 +20,6 @@ public class HCluster {
         for (int i = 0; i < dimension; i++) {
             centroid[i] = center[i];
         }
-
-        mNumPointsInClusters = 1;
-
     }
 
     /**
@@ -37,11 +31,11 @@ public class HCluster {
         double ssd = 0;
         double mse = 0.0;
 
-        for (int i = 0; i < this.mNumPointsInClusters; i++) {
+        for (Integer i : pointsIndexList) {
             ssd += HClusterData.distanceBetween(this.centroid, data[i].vectors, isGPS);
         }
 
-        mse = ssd / this.mNumPointsInClusters;
+        mse = ssd / this.pointsIndexList.size();
 
         /*
     	System.out.println("calcMSE");

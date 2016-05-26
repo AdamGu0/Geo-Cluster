@@ -61,13 +61,14 @@ public class HierarchicalClustering {
         for (int i = 0; i < this.hclusters.size(); i++) { // K类
             HCluster hcluster = this.hclusters.get(i);
 
-            clusters[i].centroid = new Point(hcluster.centroid, isGPS);
+            //clusters[i].centroid = new Point(hcluster.centroid, isGPS);
 
             int size = hcluster.pointsIndexList.size();
             for (int j = 0; j < size; j++) {
                 int index = hcluster.pointsIndexList.get(j);
                 clusters[i].pointsList.add(this.data[index]);
             }
+            clusters[i].calcCentroid(new Point(isGPS));
         }
 
         return clusters;

@@ -151,14 +151,31 @@ public class HClusterData {
         }
         return Math.sqrt(dist);
     }
+    
+    // Group-linkage：这种方法就是把两个集合中的点两两的距离全部放在一起求一个平均值
+    private double groupLinkage(HCluster ha, HCluster hb) {
+
+        double result = 0;
+        int ha_size = ha.pointsIndexList.size();
+        int hb_size = hb.pointsIndexList.size();
+
+        for (int i = 0; i < ha_size; i++) {
+            int ha_index = ha.pointsIndexList.get(i);
+            for (int j = 0; j < hb_size; j++) {
+                int hb_index = hb.pointsIndexList.get(j);
+                result += this.data[ha_index].getDistance(this.data[hb_index]);
+            }
+        }
+
+        return result / (ha_size * hb_size);
+    }
 
     public void doCluster() {
-
         while (hclusters.size() != K) {
 
             System.out.println(hclusters.size());
 
-            // Get the pair
+            // Get the pair,即获取到最相似的两个类
             int ith = -1;
             int jth = -1;
             double minDist = Double.MAX_VALUE;
@@ -179,16 +196,9 @@ public class HClusterData {
                 jth = temp;
             }
 
-            // Update mClusters.
-            double[] average = averageBetween(hclusters.get(ith).centroid, hclusters.get(jth).centroid,
-                    hclusters.get(ith).mNumPointsInClusters, hclusters.get(jth).mNumPointsInClusters);
+            double similarityDistance = groupLinkage(hclusters.get(ith), hclusters.get(jth));
 
-            for (int i = 0; i < 2; i++) {
-                hclusters.get(ith).centroid[i] = average[i];
-            }
-            int count = hclusters.get(ith).mNumPointsInClusters + hclusters.get(jth).mNumPointsInClusters;
-            hclusters.get(ith).mNumPointsInClusters = count;
-
+            // 合并j类到i类
             // 将第j类的元素全部加入到i类中
             for (int i = 0; i < hclusters.get(jth).pointsIndexList.size(); i++) {
                 hclusters.get(ith).pointsIndexList.add(hclusters.get(jth).pointsIndexList.get(i));
@@ -203,7 +213,9 @@ public class HClusterData {
             for (int ii = 0; ii < similarityMatrix.size(); ii++) {
                 // mMatrix update
                 similarityMatrix.get(ii).remove(jth);
-                double distNow = distanceBetween(hclusters.get(ii).centroid, hclusters.get(ith).centroid, isGPS);
+                double distNow = groupLinkage(hclusters.get(ii), hclusters.get(ith));
+
+                // double distNow = distanceBetween(hclusters.get(ii).centroid, hclusters.get(ith).centroid);
                 similarityMatrix.get(ii).set(ith, distNow);
 
                 // mMinIndex update. worst case is when mMinIndex[ii] == ith or jth, and distNow > distIth or distJth
@@ -212,6 +224,8 @@ public class HClusterData {
             }
 
         } // while	
+
+        //calcCentroid();
 
         // Print output
 /*        for(int i = 0; i < hclusters.size(); i++) {
@@ -225,6 +239,25 @@ public class HClusterData {
     		System.out.print("\n\n");
         }*/
     }
+
+    /**
+     * calculate the Centroid
+     *
+     * @return
+     */
+    private void calcCentroid() {
+        for (int i = 0; i < this.K; i++) {
+            for (Integer index : HClusterData.hclusters.get(i).pointsIndexList) {
+                for (int dim = 0; dim < HClusterData.hclusters.get(i).centroid.length; dim++) {
+                    HClusterData.hclusters.get(i).centroid[dim] += this.data[index].vectors[dim];
+                }
+            }
+            for (int dim = 0; dim < HClusterData.hclusters.get(i).centroid.length; dim++) {
+                HClusterData.hclusters.get(i).centroid[dim] /= HClusterData.hclusters.get(i).pointsIndexList.size();
+            }
+        }
+    }
+
 
     /**
      * Returns the result

@@ -200,7 +200,7 @@ public class ClusterPanel extends JPanel {
     
     // select the symbol for drawing different clusters with different colors
     private String selectSymbol(int k) {
-        String str = "*+#123456789abcdefghijklmnopqrstuvwxyz"; // candidate colors
+        String str = "*+#123456789abcdefghijklmnopqrstuvwxyz"; // candidate strings
         String s = "";
         int i = k % 38;
         s = str.substring(i, i + 1);
@@ -208,9 +208,9 @@ public class ClusterPanel extends JPanel {
         return s;
     }
 
-    // select random color for drawing each cluster
+    // select color for drawing each cluster
     private Color selectColor(int i) {
-        Random random = new Random();
+        //Random random = new Random();
         Color color;
         int r, g, b;
         r = i * 50 % 255;

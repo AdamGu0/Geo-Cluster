@@ -146,9 +146,10 @@ public class SpectralClustering {
     private void calculateLaplacianMatrix() {
         System.out.println("Computing Laplacian matrix from Diagonal matrix...");
         /* initialize matrix*/
-        SimpleMatrix W = similarityMatrix;
-        SimpleMatrix D = diagonalInverseSquareRoot(diagonalMatrix);
-        laplacianMatrix = D.mult(W).mult(W);
+        // SimpleMatrix W = similarityMatrix;
+        // SimpleMatrix D = diagonalInverseSquareRoot(diagonalMatrix);
+        // laplacianMatrix = D.mult(W).mult(D);
+        laplacianMatrix = diagonalMatrix.minus(similarityMatrix);
 
         System.out.println("Computing Laplacian matrix from Diagonal matrix end...");
     }
