@@ -196,8 +196,6 @@ public class HClusterData {
                 jth = temp;
             }
 
-            double similarityDistance = groupLinkage(hclusters.get(ith), hclusters.get(jth));
-
             // 合并j类到i类
             // 将第j类的元素全部加入到i类中
             for (int i = 0; i < hclusters.get(jth).pointsIndexList.size(); i++) {
@@ -225,8 +223,6 @@ public class HClusterData {
 
         } // while	
 
-        //calcCentroid();
-
         // Print output
 /*        for(int i = 0; i < hclusters.size(); i++) {
     		System.out.print(i + 1);
@@ -239,25 +235,6 @@ public class HClusterData {
     		System.out.print("\n\n");
         }*/
     }
-
-    /**
-     * calculate the Centroid
-     *
-     * @return
-     */
-    private void calcCentroid() {
-        for (int i = 0; i < this.K; i++) {
-            for (Integer index : HClusterData.hclusters.get(i).pointsIndexList) {
-                for (int dim = 0; dim < HClusterData.hclusters.get(i).centroid.length; dim++) {
-                    HClusterData.hclusters.get(i).centroid[dim] += this.data[index].vectors[dim];
-                }
-            }
-            for (int dim = 0; dim < HClusterData.hclusters.get(i).centroid.length; dim++) {
-                HClusterData.hclusters.get(i).centroid[dim] /= HClusterData.hclusters.get(i).pointsIndexList.size();
-            }
-        }
-    }
-
 
     /**
      * Returns the result

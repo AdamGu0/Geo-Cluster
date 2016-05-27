@@ -482,18 +482,27 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="hierarchicalPanel" max="32767" attributes="0"/>
-                          <Component id="kMeansPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="smartSwapPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="gridGrowingPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="markerClustererPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="dbScanPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="spectralPanel" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="hierarchicalPanel" max="32767" attributes="0"/>
+                                  <Component id="kMeansPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="smartSwapPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="gridGrowingPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="markerClustererPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="dbScanPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="spectralPanel" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -509,11 +518,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="gridGrowingPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="markerClustererPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="spectralPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="hierarchicalPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="markerClustererPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1636,6 +1647,11 @@
                 </Container>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="jLabel26">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Geo data only:"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

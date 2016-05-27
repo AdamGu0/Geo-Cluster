@@ -8,6 +8,7 @@ package main;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.CompositeContext;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -86,7 +87,21 @@ public class MapKit extends JXMapKit {
         }
         waypointPainter.setWaypoints(waypoints);
     }
-    
+
+    public void setWaypoints(Point[] points) {
+        if (points == null) {
+            waypoints = new HashSet<MyWaypoint>(0);
+        } else {
+            waypoints = new HashSet<MyWaypoint>(points.length * 2);
+            for (Point p : points) {
+                GeoPosition g = new GeoPosition(p.vectors[1], p.vectors[0]);
+                MyWaypoint w = new MyWaypoint(g);
+                waypoints.add(w);
+            }
+        }
+        waypointPainter.setWaypoints(waypoints);
+    }
+
     public void adjustMapByWaypoints() {
         Set<GeoPosition> positions = new HashSet<>(waypoints.size() * 2);
         for (MyWaypoint w : waypoints) {
@@ -117,6 +132,12 @@ class MyWaypoint extends DefaultWaypoint {
         } else {
             this.color = new Color(255, 0, 0, 252);
         }
+    }
+
+    public MyWaypoint(GeoPosition coord) {
+        super(coord);
+        this.amount = -1;
+        this.color = new Color(0, 127, 255);
     }
 }
 
@@ -164,37 +185,46 @@ class MyWaypointRenderer implements WaypointRenderer<MyWaypoint> {
 
     @Override
     public void paintWaypoint(Graphics2D g, JXMapViewer viewer, MyWaypoint w) {
-                    g = (Graphics2D) g.create();
+        g = (Graphics2D) g.create();
+        
+        Point2D point = viewer.getTileFactory().geoToPixel(w.getPosition(), viewer.getZoom());
+        int x = (int) point.getX();
+        int y = (int) point.getY();
+        
+        if (w.amount == -1) { //means it's an original data point
+            int fontSize = 28 - viewer.getZoom() * 2; //font size is larger when zoom in
+            if (fontSize < 6) fontSize = 6;
+            g.setFont(new Font("Arial", Font.PLAIN, fontSize));
+            g.setColor(w.color);
+            g.drawString("x", x - fontSize/2, y + fontSize/2);
+            g.dispose();
+            return;
+        }
+        
+        if (origImage == null) {
+            return;
+        }
 
-            if (origImage == null) {
-                return;
-            }
+        BufferedImage myImg = map.get(w.color);
 
-            BufferedImage myImg = map.get(w.color);
+        if (myImg == null) {
+            myImg = convert(origImage, w.color);
+            map.put(w.color, myImg);
+        }
 
-            if (myImg == null) {
-                myImg = convert(origImage, w.color);
-                map.put(w.color, myImg);
-            }
+        g.drawImage(myImg, x - myImg.getWidth() / 2, y - myImg.getHeight(), null);
 
-            Point2D point = viewer.getTileFactory().geoToPixel(w.getPosition(), viewer.getZoom());
-
-            int x = (int) point.getX();
-            int y = (int) point.getY();
-
-            g.drawImage(myImg, x - myImg.getWidth() / 2, y - myImg.getHeight(), null);
-
-            String label = String.valueOf(w.amount);
+        String label = String.valueOf(w.amount);
 
 //		g.setFont(font);
-            FontMetrics metrics = g.getFontMetrics();
-            int tw = metrics.stringWidth(label);
-            int th = 1 + metrics.getAscent();
+        FontMetrics metrics = g.getFontMetrics();
+        int tw = metrics.stringWidth(label);
+        int th = 1 + metrics.getAscent();
 
 //		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.drawString(label, x - tw / 2, y + th);
+        g.drawString(label, x - tw / 2, y + th);
 
-            g.dispose();
+        g.dispose();
     }
 }
 

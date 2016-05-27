@@ -50,7 +50,7 @@ public class ClusterPanel extends JPanel {
             drawCluster(clusters[i], selectSymbol(i), selectColor(i));
         }
     }
-        
+    
     private void drawCluster(Cluster cluster, String str, Color color) {
         ArrayList<Point> points = cluster.pointsList;
         Point centroid = cluster.centroid.copyPoint();
@@ -64,7 +64,7 @@ public class ClusterPanel extends JPanel {
         drawPoint(centroid, Color.RED);
     }
     
-    public void drawPoint(Point point, Color color) {
+    private void drawPoint(Point point, Color color) {
         //System.out.println(point.toString());
         Point newPoint = normalizePoint(point);
         int x, y;
@@ -77,13 +77,13 @@ public class ClusterPanel extends JPanel {
         }
     }
 
-    public void drawPoints(ArrayList<Point> points, String str, Color color) {
+    private void drawPoints(ArrayList<Point> points, String str, Color color) {
         Point[] newPoints = normalizePoints(points);
         Point[] hullPoints; // convex hull points
         int i;
         int len = newPoints.length;
         int x, y;
-        gs.setFont(new Font("Arial", Font.BOLD, 12));
+        gs.setFont(new Font("Arial", Font.PLAIN, 10));
         gs.setColor(color);
 
         for (i = 0; i < len; i++) {
@@ -100,7 +100,7 @@ public class ClusterPanel extends JPanel {
         }
     }
     
-    public void drawConvexHull(Point[] points) {
+    private void drawConvexHull(Point[] points) {
         Color color = new Color(110, 110, 110);
         int i;
         int len;
@@ -121,7 +121,7 @@ public class ClusterPanel extends JPanel {
 
     }
     
-    public void drawPolyLine(Point p1, Point p2, Color color) {
+    private void drawPolyLine(Point p1, Point p2, Color color) {
         //gs.setColor(color);
         //gs.drawLine((int)p1.x, (int)p1.y, (int)p2.x, (int)p2.y);
 
