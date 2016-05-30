@@ -190,6 +190,7 @@ public class Application extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Geo-Cluster");
+        setResizable(false);
 
         stateLabel.setText("   ");
         stateLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -1250,12 +1251,14 @@ public class Application extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(settingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(tabbedViewerPanel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stateLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tabbedViewerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stateLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(settingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tabbedViewerPanel.getAccessibleContext().setAccessibleName("");
@@ -1432,7 +1435,7 @@ public class Application extends javax.swing.JFrame {
 
     private void setIsGPSData(boolean isGPSData) {
         if (isGPSData) {
-            dataTypeLabel.setText("GPS");
+            dataTypeLabel.setText("Geo");
             mapKit.setWaypoints(data);
         } else {
             dataTypeLabel.setText("Normal");
