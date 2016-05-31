@@ -1525,7 +1525,7 @@ public class Application extends javax.swing.JFrame {
 
         String exportedFileName = fileName.substring(0, fileName.length() - 4) + "_" + algorithm + "_" + presentTime + ".json";
         try {
-            FileOutputStream os = new FileOutputStream("data_export/" + exportedFileName);
+            FileOutputStream os = new FileOutputStream(exportedFileName);
             OutputStreamWriter writer = new OutputStreamWriter(os, "UTF-8");
             jsonObject.write(writer);
             writer.close();
